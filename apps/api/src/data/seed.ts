@@ -111,7 +111,8 @@ export const seedReviews: Review[] = [
     stayId: "stay-4",
     author: "Lena",
     rating: 4,
-    comment: "Stunning house, stairs are steep though — heads up for anyone with mobility concerns.",
+    comment:
+      "Stunning house, stairs are steep though — heads up for anyone with mobility concerns.",
     createdAt: "2026-05-28T14:45:00.000Z",
   },
 ];

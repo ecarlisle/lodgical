@@ -13,11 +13,15 @@ describe("GET /stays", () => {
   });
 
   it("filters by location", async () => {
-    const response = await request(app).get("/stays").query({ location: "Lisbon" });
+    const response = await request(app)
+      .get("/stays")
+      .query({ location: "Lisbon" });
     expect(response.status).toBe(200);
-    expect(response.body.every((stay: { location: string }) =>
-      stay.location.toLowerCase().includes("lisbon"),
-    )).toBe(true);
+    expect(
+      response.body.every((stay: { location: string }) =>
+        stay.location.toLowerCase().includes("lisbon"),
+      ),
+    ).toBe(true);
   });
 });
 
@@ -45,7 +49,9 @@ describe("POST /stays/:id/reviews", () => {
 
     const reviews = await request(app).get("/stays/stay-2/reviews");
     expect(
-      reviews.body.some((review: { comment: string }) => review.comment === "Great stay!"),
+      reviews.body.some(
+        (review: { comment: string }) => review.comment === "Great stay!",
+      ),
     ).toBe(true);
   });
 

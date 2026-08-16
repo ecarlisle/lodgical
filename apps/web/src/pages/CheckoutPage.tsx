@@ -27,7 +27,13 @@ export function CheckoutPage() {
     formState: { errors, isSubmitting },
   } = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
-    defaultValues: { guestName: "", email: "", checkIn: "", checkOut: "", guests: 1 },
+    defaultValues: {
+      guestName: "",
+      email: "",
+      checkIn: "",
+      checkOut: "",
+      guests: 1,
+    },
   });
 
   const booking = useMutation({
@@ -72,13 +78,17 @@ export function CheckoutPage() {
         <div className={styles.field}>
           <label htmlFor="guestName">Full name</label>
           <input id="guestName" {...register("guestName")} />
-          {errors.guestName && <span className={styles.error}>{errors.guestName.message}</span>}
+          {errors.guestName && (
+            <span className={styles.error}>{errors.guestName.message}</span>
+          )}
         </div>
 
         <div className={styles.field}>
           <label htmlFor="email">Email</label>
           <input id="email" type="email" {...register("email")} />
-          {errors.email && <span className={styles.error}>{errors.email.message}</span>}
+          {errors.email && (
+            <span className={styles.error}>{errors.email.message}</span>
+          )}
         </div>
 
         <div className={styles.row}>
@@ -89,7 +99,9 @@ export function CheckoutPage() {
           <div className={styles.field}>
             <label htmlFor="checkOut">Check-out</label>
             <input id="checkOut" type="date" {...register("checkOut")} />
-            {errors.checkOut && <span className={styles.error}>{errors.checkOut.message}</span>}
+            {errors.checkOut && (
+              <span className={styles.error}>{errors.checkOut.message}</span>
+            )}
           </div>
         </div>
 
@@ -102,7 +114,9 @@ export function CheckoutPage() {
             max={stay.maxGuests}
             {...register("guests", { valueAsNumber: true })}
           />
-          {errors.guests && <span className={styles.error}>{errors.guests.message}</span>}
+          {errors.guests && (
+            <span className={styles.error}>{errors.guests.message}</span>
+          )}
         </div>
 
         <div className={styles.total}>
@@ -112,7 +126,11 @@ export function CheckoutPage() {
           <strong>${total}</strong>
         </div>
 
-        <button type="submit" disabled={isSubmitting || nights <= 0} className={styles.submit}>
+        <button
+          type="submit"
+          disabled={isSubmitting || nights <= 0}
+          className={styles.submit}
+        >
           {isSubmitting ? "Booking…" : "Confirm booking"}
         </button>
 

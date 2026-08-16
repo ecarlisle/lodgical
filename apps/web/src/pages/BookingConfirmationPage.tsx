@@ -12,11 +12,13 @@ export function BookingConfirmationPage() {
     queryFn: () => fetchBooking(id!),
   });
 
-  if (bookingQuery.isPending) return <StatusMessage>Loading booking…</StatusMessage>;
+  if (bookingQuery.isPending)
+    return <StatusMessage>Loading booking…</StatusMessage>;
   if (bookingQuery.isError)
     return (
       <StatusMessage tone="error">
-        We couldn't find that booking. Check the confirmation link and try again.
+        We couldn't find that booking. Check the confirmation link and try
+        again.
       </StatusMessage>
     );
 
@@ -25,7 +27,10 @@ export function BookingConfirmationPage() {
   return (
     <div className={styles.confirmation}>
       <h1>Booking confirmed</h1>
-      <p>Thanks, {booking.guestName} — a confirmation was "sent" to {booking.email}.</p>
+      <p>
+        Thanks, {booking.guestName} — a confirmation was "sent" to{" "}
+        {booking.email}.
+      </p>
       <dl className={styles.details}>
         <dt>Confirmation number</dt>
         <dd>{booking.id}</dd>

@@ -72,7 +72,8 @@ export function StayDetailPage() {
 
       <div className={styles.bookingBar}>
         <div>
-          <strong>${stay.pricePerNight}</strong> / night · up to {stay.maxGuests} guests
+          <strong>${stay.pricePerNight}</strong> / night · up to{" "}
+          {stay.maxGuests} guests
         </div>
         <Link to={`/checkout/${stay.id}`} className={styles.bookButton}>
           Book now
@@ -81,12 +82,16 @@ export function StayDetailPage() {
 
       <section>
         <h2>Reviews ({stay.reviewCount})</h2>
-        {reviewsQuery.isPending && <StatusMessage>Loading reviews…</StatusMessage>}
+        {reviewsQuery.isPending && (
+          <StatusMessage>Loading reviews…</StatusMessage>
+        )}
         {reviewsQuery.isError && (
           <StatusMessage tone="error">Couldn't load reviews.</StatusMessage>
         )}
         {reviewsQuery.data?.length === 0 && (
-          <StatusMessage>No reviews yet. Be the first to write one.</StatusMessage>
+          <StatusMessage>
+            No reviews yet. Be the first to write one.
+          </StatusMessage>
         )}
         {reviewsQuery.data && reviewsQuery.data.length > 0 && (
           <ul className={styles.reviewList}>
@@ -112,11 +117,16 @@ export function StayDetailPage() {
           <div className={styles.field}>
             <label htmlFor="author">Name</label>
             <input id="author" {...register("author")} />
-            {errors.author && <span className={styles.error}>{errors.author.message}</span>}
+            {errors.author && (
+              <span className={styles.error}>{errors.author.message}</span>
+            )}
           </div>
           <div className={styles.field}>
             <label htmlFor="rating">Rating</label>
-            <select id="rating" {...register("rating", { valueAsNumber: true })}>
+            <select
+              id="rating"
+              {...register("rating", { valueAsNumber: true })}
+            >
               {[5, 4, 3, 2, 1].map((value) => (
                 <option key={value} value={value}>
                   {value}
@@ -127,9 +137,15 @@ export function StayDetailPage() {
           <div className={styles.field}>
             <label htmlFor="comment">Comment</label>
             <textarea id="comment" rows={3} {...register("comment")} />
-            {errors.comment && <span className={styles.error}>{errors.comment.message}</span>}
+            {errors.comment && (
+              <span className={styles.error}>{errors.comment.message}</span>
+            )}
           </div>
-          <button type="submit" disabled={isSubmitting} className={styles.submit}>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className={styles.submit}
+          >
             {isSubmitting ? "Submitting…" : "Submit review"}
           </button>
           {submitReview.isError && (

@@ -8,7 +8,11 @@ type StatusMessageProps = {
 
 export function StatusMessage({ tone = "info", children }: StatusMessageProps) {
   return (
-    <div className={styles.message} data-tone={tone} role={tone === "error" ? "alert" : "status"}>
+    <div
+      className={styles.message}
+      data-tone={tone}
+      role={tone === "error" ? "alert" : "status"}
+    >
       {children}
     </div>
   );

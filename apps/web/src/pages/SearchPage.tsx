@@ -31,11 +31,22 @@ export function SearchPage() {
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.field}>
           <label htmlFor="location">Location</label>
-          <input id="location" name="location" type="text" placeholder="e.g. Lisbon" />
+          <input
+            id="location"
+            name="location"
+            type="text"
+            placeholder="e.g. Lisbon"
+          />
         </div>
         <div className={styles.field}>
           <label htmlFor="guests">Guests</label>
-          <input id="guests" name="guests" type="number" min={1} defaultValue={1} />
+          <input
+            id="guests"
+            name="guests"
+            type="number"
+            min={1}
+            defaultValue={1}
+          />
         </div>
         <button type="submit" className={styles.submit}>
           Search

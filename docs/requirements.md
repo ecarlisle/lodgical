@@ -11,7 +11,7 @@ We're interested in seeing:
 2. The tradeoffs you made
 3. Your product-forward thinking
 
-We recommend spending 4–6 hours on the assessment. Please treat this as a firm timebox.  When you reach it, stop where you are. We're not expecting a finished product.  However, within this time frame we want to see your best work: 
+We recommend spending 4–6 hours on the assessment. Please treat this as a firm timebox. When you reach it, stop where you are. We're not expecting a finished product. However, within this time frame we want to see your best work:
 
 1. Thoughtful architecture
 2. Clean code
@@ -43,7 +43,7 @@ We're evaluating areas such as:
 5. Testing and maintainability
 6. Communication around tradeoffs and decisions
 
-We're not looking for pixel-perfect UI. __Thoughtful decisions__, __clear code__, and __smart prioritization__ matter far more.
+We're not looking for pixel-perfect UI. **Thoughtful decisions**, **clear code**, and **smart prioritization** matter far more.
 
 ### Technical Expectations
 
@@ -67,19 +67,20 @@ Please send us:
 
 1. A Git repository containing both the frontend and backend
 1. A README covering:
-  a. Setup instructions
-  b. Available scripts
-  c. Architecture decisions
-  d. Tradeoffs
-  e. What you'd build next with additional time
-  f. A short note describing how you used AI/LLMs during the project, including your general approach and any guardrails you used
-  g. A short screen recording (5–10 minutes is plenty) walking us through your solution, key decisions, and anything you'd like us to know while reviewing
+   a. Setup instructions
+   b. Available scripts
+   c. Architecture decisions
+   d. Tradeoffs
+   e. What you'd build next with additional time
+   f. A short note describing how you used AI/LLMs during the project, including your general approach and any guardrails you used
+   g. A short screen recording (5–10 minutes is plenty) walking us through your solution, key decisions, and anything you'd like us to know while reviewing
 
 ## Assessment Brief
 
 ### Frontend Technical Assessment – Travel Booking (React)
 
 ### Quick Facts
+
 1. Domain: Travel (hotels or similar stay products)
 2. Stack: React (TypeScript recommended)
 3. Includes a small backend API
@@ -87,11 +88,12 @@ Please send us:
 5. Suggested timebox: 4–6 hours
 
 ### Minimum API Examples
+
 1. `GET /stays`
 1. `GET /stays/`
-3. `GET /stays/reviews`
-4. `POST /stays/reviews`
-5. `POST /bookings`
+1. `GET /stays/reviews`
+1. `POST /stays/reviews`
+1. `POST /bookings`
 
 Feel free to adjust the API design if you think another approach makes more sense.
 

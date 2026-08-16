@@ -32,27 +32,27 @@ cp apps/api/.env.example apps/api/.env
 
 Run from the repo root:
 
-| Command | Description |
-|---|---|
-| `pnpm dev:api` | Start the backend on `http://localhost:4000` |
-| `pnpm dev:web` | Start the frontend on `http://localhost:5173` |
-| `pnpm lint` | Lint all packages |
-| `pnpm typecheck` | Typecheck all packages |
-| `pnpm test` | Run all tests |
-| `pnpm build` | Production build of shared, api, and web |
+| Command          | Description                                   |
+| ---------------- | --------------------------------------------- |
+| `pnpm dev:api`   | Start the backend on `http://localhost:4000`  |
+| `pnpm dev:web`   | Start the frontend on `http://localhost:5173` |
+| `pnpm lint`      | Lint all packages                             |
+| `pnpm typecheck` | Typecheck all packages                        |
+| `pnpm test`      | Run all tests                                 |
+| `pnpm build`     | Production build of shared, api, and web      |
 
 Run both `dev:api` and `dev:web` in separate terminals for local development.
 
 ## API
 
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/stays` | List/search stays (`location`, `guests`, `minPrice`, `maxPrice`) |
-| `GET` | `/stays/:id` | Stay details |
-| `GET` | `/stays/:id/reviews` | Reviews for a stay |
-| `POST` | `/stays/:id/reviews` | Add a review |
-| `POST` | `/bookings` | Create a booking (checkout) |
-| `GET` | `/bookings/:id` | Booking confirmation |
+| Method | Path                 | Description                                                      |
+| ------ | -------------------- | ---------------------------------------------------------------- |
+| `GET`  | `/stays`             | List/search stays (`location`, `guests`, `minPrice`, `maxPrice`) |
+| `GET`  | `/stays/:id`         | Stay details                                                     |
+| `GET`  | `/stays/:id/reviews` | Reviews for a stay                                               |
+| `POST` | `/stays/:id/reviews` | Add a review                                                     |
+| `POST` | `/bookings`          | Create a booking (checkout)                                      |
+| `GET`  | `/bookings/:id`      | Booking confirmation                                             |
 
 Data is seeded in-memory (`apps/api/src/data/seed.ts`) — no database.
 

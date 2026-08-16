@@ -38,10 +38,14 @@ export function listStays(query: StaySearchQuery): Stay[] {
     )
     .filter((stay) => (query.guests ? stay.maxGuests >= query.guests : true))
     .filter((stay) =>
-      query.minPrice !== undefined ? stay.pricePerNight >= query.minPrice : true,
+      query.minPrice !== undefined
+        ? stay.pricePerNight >= query.minPrice
+        : true,
     )
     .filter((stay) =>
-      query.maxPrice !== undefined ? stay.pricePerNight <= query.maxPrice : true,
+      query.maxPrice !== undefined
+        ? stay.pricePerNight <= query.maxPrice
+        : true,
     )
     .map(toStay);
 }
