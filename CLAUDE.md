@@ -27,7 +27,7 @@ pnpm fallow           # full static-analysis pipeline (dead code, duplication, h
 pnpm fallow:audit     # gated: fails only on issues introduced vs. the base branch (what CI runs)
 ```
 
-Always run `pnpm lint && pnpm fallow:audit && pnpm typecheck && pnpm test && pnpm build` before considering a change done — this mirrors `.github/workflows/ci.yml` exactly, so if it fails locally it fails in CI. `pnpm lighthouse` is intentionally not part of CI — performance scores are noisy on shared CI runners, so treat it as a local/manual check, not a gate. `pnpm fallow` (unscoped) is also not the CI gate — it always reports the whole repo's pre-existing findings and will show issues that aren't yours; use `fallow:audit` to know whether _your_ change is clean.
+Always run `pnpm format:check && pnpm lint && pnpm fallow:audit && pnpm typecheck && pnpm test && pnpm build` before considering a change done — this mirrors `.github/workflows/ci.yml` exactly, so if it fails locally it fails in CI. `pnpm lighthouse` is intentionally not part of CI — performance scores are noisy on shared CI runners, so treat it as a local/manual check, not a gate. `pnpm fallow` (unscoped) is also not the CI gate — it always reports the whole repo's pre-existing findings and will show issues that aren't yours; use `fallow:audit` to know whether _your_ change is clean.
 
 ## Conventions
 
