@@ -15,7 +15,8 @@
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "lighthouse": "pnpm --filter @lodgical/web lighthouse"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

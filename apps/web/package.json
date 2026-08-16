@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "typecheck": "tsc -b --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lighthouse": "pnpm build && start-server-and-test \"pnpm run preview\" http://localhost:4173 \"pnpm run lighthouse:run\"",
+    "lighthouse:run": "lighthouse http://localhost:4173 --output=html --output-path=./lighthouse-report.html --chrome-flags=\"--headless=new\" --quiet"
   },
   "dependencies": {
     "@lodgical/shared": "workspace:*",
@@ -30,6 +32,8 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
     "jsdom": "^25.0.1",
+    "lighthouse": "^12.2.1",
+    "start-server-and-test": "^2.0.8",
     "typescript": "~6.0.2",
     "vite": "^8.2.0",
     "vitest": "^4.1.10"

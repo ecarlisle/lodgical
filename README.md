@@ -48,19 +48,22 @@ Open `http://localhost:5173` and search, view a stay, leave a review, and comple
 
 Run from the repo root:
 
-| Command             | Description                                        |
-| ------------------- | -------------------------------------------------- |
-| `pnpm dev`          | Start both the backend and frontend together       |
-| `pnpm dev:api`      | Start only the backend on `http://localhost:4000`  |
-| `pnpm dev:web`      | Start only the frontend on `http://localhost:5173` |
-| `pnpm lint`         | Lint all packages                                  |
-| `pnpm typecheck`    | Typecheck all packages                             |
-| `pnpm test`         | Run all tests                                      |
-| `pnpm format`       | Format all files with Prettier                     |
-| `pnpm format:check` | Check formatting without writing (used in CI)      |
-| `pnpm build`        | Production build of shared, api, and web           |
+| Command             | Description                                                              |
+| ------------------- | ------------------------------------------------------------------------ |
+| `pnpm dev`          | Start both the backend and frontend together                             |
+| `pnpm dev:api`      | Start only the backend on `http://localhost:4000`                        |
+| `pnpm dev:web`      | Start only the frontend on `http://localhost:5173`                       |
+| `pnpm lint`         | Lint all packages                                                        |
+| `pnpm typecheck`    | Typecheck all packages                                                   |
+| `pnpm test`         | Run all tests                                                            |
+| `pnpm format`       | Format all files with Prettier                                           |
+| `pnpm format:check` | Check formatting without writing (used in CI)                            |
+| `pnpm build`        | Production build of shared, api, and web                                 |
+| `pnpm lighthouse`   | Build, serve the production build, and run a Lighthouse audit against it |
 
 CI (`.github/workflows/ci.yml`) runs `format:check`, `lint`, `typecheck`, `test`, and `build` on every push and pull request.
+
+`pnpm lighthouse` builds `apps/web`, serves the build with `vite preview`, runs [Lighthouse](https://developer.chrome.com/docs/lighthouse) against it headlessly, and writes `apps/web/lighthouse-report.html` (gitignored — open it in a browser to view). It audits performance, accessibility, best practices, and SEO against the production build, not the dev server. You may see a stray `ELIFECYCLE Command failed` line at the end of the output — that's just the preview server being killed once the audit finishes, not an actual failure; check the script's exit code or the generated report, not that line.
 
 ## Project structure
 

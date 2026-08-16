@@ -22,9 +22,10 @@ pnpm test             # vitest, all packages
 pnpm format           # prettier --write .
 pnpm format:check     # prettier --check . (what CI runs)
 pnpm build            # shared -> api -> web, in that order (web imports shared's types)
+pnpm lighthouse       # builds web, serves it, audits it with Lighthouse -> apps/web/lighthouse-report.html
 ```
 
-Always run `pnpm lint && pnpm typecheck && pnpm test && pnpm build` before considering a change done — this mirrors `.github/workflows/ci.yml` exactly, so if it fails locally it fails in CI.
+Always run `pnpm lint && pnpm typecheck && pnpm test && pnpm build` before considering a change done — this mirrors `.github/workflows/ci.yml` exactly, so if it fails locally it fails in CI. `pnpm lighthouse` is intentionally not part of CI — performance scores are noisy on shared CI runners, so treat it as a local/manual check, not a gate.
 
 ## Conventions
 
