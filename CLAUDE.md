@@ -23,9 +23,11 @@ pnpm format           # prettier --write .
 pnpm format:check     # prettier --check . (what CI runs)
 pnpm build            # shared -> api -> web, in that order (web imports shared's types)
 pnpm lighthouse       # builds web, serves it, audits it with Lighthouse -> apps/web/lighthouse-report.html
+pnpm fallow           # full static-analysis pipeline (dead code, duplication, health), whole repo, unscoped
+pnpm fallow:audit     # gated: fails only on issues introduced vs. the base branch (what CI runs)
 ```
 
-Always run `pnpm lint && pnpm typecheck && pnpm test && pnpm build` before considering a change done — this mirrors `.github/workflows/ci.yml` exactly, so if it fails locally it fails in CI. `pnpm lighthouse` is intentionally not part of CI — performance scores are noisy on shared CI runners, so treat it as a local/manual check, not a gate.
+Always run `pnpm lint && pnpm fallow:audit && pnpm typecheck && pnpm test && pnpm build` before considering a change done — this mirrors `.github/workflows/ci.yml` exactly, so if it fails locally it fails in CI. `pnpm lighthouse` is intentionally not part of CI — performance scores are noisy on shared CI runners, so treat it as a local/manual check, not a gate. `pnpm fallow` (unscoped) is also not the CI gate — it always reports the whole repo's pre-existing findings and will show issues that aren't yours; use `fallow:audit` to know whether _your_ change is clean.
 
 ## Conventions
 
@@ -40,6 +42,7 @@ Always run `pnpm lint && pnpm typecheck && pnpm test && pnpm build` before consi
 - `apps/api` has **two tsconfigs**: `tsconfig.json` (typecheck, includes tests) and `tsconfig.build.json` (build, excludes `__tests__`/`*.test.ts`). If you add a new build-adjacent script, use `tsconfig.build.json` — the split exists because `tsc -p tsconfig.json` previously compiled test files into `dist/`, and vitest picked those up alongside the source tests and silently doubled the test count. Don't collapse these back into one config.
 - `vitest` is pinned to `^4.1.10` in both apps, not the version Vite's scaffold defaults to — the scaffold's default vitest only supports vite ≤5, and this repo is on vite 8. Keep them in sync if you bump either.
 - The Prettier config (`.prettierrc.json`) and VS Code's `.vscode/settings.json` (`editor.defaultFormatter`) both matter — without the VS Code setting, the editor nags about "multiple formatters" for TS/TSX because the built-in formatter and the Prettier extension both register.
+- `fallow`'s optional `--type-aware` companion (`fallow-type-aware`) pulls in TypeScript 7 as its own dependency. That's why the root `package.json` pins an explicit `"typescript": "^5.6.3"` devDependency even though root has no TS files of its own to typecheck — without it, root-level module resolution for `eslint.config.js` (via `typescript-eslint`, which doesn't support TS 7 yet) picks up TS 7 transitively and lint breaks with "typescript-eslint does not support TS 7.0". Don't remove that pin without checking `pnpm why typescript --recursive` first.
 
 ## After completing a requirement
 

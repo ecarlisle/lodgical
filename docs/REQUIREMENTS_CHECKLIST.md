@@ -27,7 +27,7 @@ Status legend: ✅ done · 🚧 partial / needs follow-up · ⬜ not started · 
 | Error state              | ✅     | `StatusMessage tone="error"` on every query/mutation                                                                                  | Manual (browser)                                                         |
 | Basic accessibility      | ✅     | Semantic headings, `alt`/`aria-label`s, visible focus rings, form `label`s                                                            | `pnpm lighthouse` — 100/100 accessibility as of last local run           |
 | A few meaningful tests   | ✅     | [`apps/api/src/__tests__/`](../apps/api/src/__tests__/) (10), [`StayCard.test.tsx`](../apps/web/src/components/StayCard.test.tsx) (2) | `pnpm test`                                                              |
-| Simple CI pipeline       | ✅     | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) — format, lint, typecheck, test, build                                      | CI run on push/PR                                                        |
+| Simple CI pipeline       | ✅     | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) — format, lint, fallow audit, typecheck, test, build                        | CI run on push/PR                                                        |
 | Production build process | ✅     | `pnpm build`                                                                                                                          | Verified locally + in CI                                                 |
 
 ## Optional
