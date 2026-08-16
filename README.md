@@ -19,7 +19,7 @@ A small travel booking app inspired by Booking.com: search stays, view details a
 
 ## Requirements
 
-See [docs/requirements.md](docs/requirements.md) for the assessment brief this project was built against.
+See [docs/requirements.md](docs/requirements.md) for the assessment brief this project was built against, and [docs/REQUIREMENTS_CHECKLIST.md](docs/REQUIREMENTS_CHECKLIST.md) for a live-tracked mapping of each requirement to where it's implemented and how it's verified.
 
 ## Prerequisites
 
