@@ -7,6 +7,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.34.4",
   "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"pnpm:dev:api\" \"pnpm:dev:web\"",
     "dev:web": "pnpm --filter @lodgical/web dev",
     "dev:api": "pnpm --filter @lodgical/api dev",
     "build": "pnpm --filter @lodgical/shared build && pnpm --filter @lodgical/api build && pnpm --filter @lodgical/web build",
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
+    "concurrently": "^9.0.1",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",

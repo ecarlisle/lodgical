@@ -34,12 +34,13 @@ cp apps/web/.env.example apps/web/.env.local
 cp apps/api/.env.example apps/api/.env
 ```
 
-Then, in two terminals:
+Then start both apps:
 
 ```bash
-pnpm dev:api   # http://localhost:4000
-pnpm dev:web   # http://localhost:5173
+pnpm dev
 ```
+
+This runs the frontend and backend together (via `concurrently`), prefixed `[api]`/`[web]` in the output. To run just one, use `pnpm dev:api` or `pnpm dev:web` instead.
 
 Open `http://localhost:5173` and search, view a stay, leave a review, and complete a checkout.
 
@@ -47,16 +48,17 @@ Open `http://localhost:5173` and search, view a stay, leave a review, and comple
 
 Run from the repo root:
 
-| Command             | Description                                   |
-| ------------------- | --------------------------------------------- |
-| `pnpm dev:api`      | Start the backend on `http://localhost:4000`  |
-| `pnpm dev:web`      | Start the frontend on `http://localhost:5173` |
-| `pnpm lint`         | Lint all packages                             |
-| `pnpm typecheck`    | Typecheck all packages                        |
-| `pnpm test`         | Run all tests                                 |
-| `pnpm format`       | Format all files with Prettier                |
-| `pnpm format:check` | Check formatting without writing (used in CI) |
-| `pnpm build`        | Production build of shared, api, and web      |
+| Command             | Description                                        |
+| ------------------- | -------------------------------------------------- |
+| `pnpm dev`          | Start both the backend and frontend together       |
+| `pnpm dev:api`      | Start only the backend on `http://localhost:4000`  |
+| `pnpm dev:web`      | Start only the frontend on `http://localhost:5173` |
+| `pnpm lint`         | Lint all packages                                  |
+| `pnpm typecheck`    | Typecheck all packages                             |
+| `pnpm test`         | Run all tests                                      |
+| `pnpm format`       | Format all files with Prettier                     |
+| `pnpm format:check` | Check formatting without writing (used in CI)      |
+| `pnpm build`        | Production build of shared, api, and web           |
 
 CI (`.github/workflows/ci.yml`) runs `format:check`, `lint`, `typecheck`, `test`, and `build` on every push and pull request.
 
