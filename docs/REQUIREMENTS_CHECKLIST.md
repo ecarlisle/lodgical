@@ -19,16 +19,16 @@ Status legend: ✅ done · 🚧 partial / needs follow-up · ⬜ not started · 
 
 ## Technical expectations
 
-| Requirement              | Status | Where                                                                                                                                 | Verified by                                     |
-| ------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| Responsive design        | 🚧     | Fluid grid/flex layouts, relative units, one small-viewport breakpoint in `Layout.module.css`                                         | Not yet checked across real breakpoints/devices |
-| Loading state            | ✅     | `StatusMessage` + TanStack Query `isPending` on every page                                                                            | Manual (browser)                                |
-| Empty state              | ✅     | "No stays match", "No reviews yet"                                                                                                    | Manual (browser)                                |
-| Error state              | ✅     | `StatusMessage tone="error"` on every query/mutation                                                                                  | Manual (browser)                                |
-| Basic accessibility      | 🚧     | Semantic headings, `alt`/`aria-label`s, visible focus rings, form `label`s                                                            | Not run through an automated audit (e.g. axe)   |
-| A few meaningful tests   | ✅     | [`apps/api/src/__tests__/`](../apps/api/src/__tests__/) (10), [`StayCard.test.tsx`](../apps/web/src/components/StayCard.test.tsx) (2) | `pnpm test`                                     |
-| Simple CI pipeline       | ✅     | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) — format, lint, typecheck, test, build                                      | CI run on push/PR                               |
-| Production build process | ✅     | `pnpm build`                                                                                                                          | Verified locally + in CI                        |
+| Requirement              | Status | Where                                                                                                                                 | Verified by                                                              |
+| ------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Responsive design        | 🚧     | Fluid grid/flex layouts, relative units, one small-viewport breakpoint in `Layout.module.css`                                         | `pnpm lighthouse` (mobile-emulated); not yet checked across real devices |
+| Loading state            | ✅     | `StatusMessage` + TanStack Query `isPending` on every page                                                                            | Manual (browser)                                                         |
+| Empty state              | ✅     | "No stays match", "No reviews yet"                                                                                                    | Manual (browser)                                                         |
+| Error state              | ✅     | `StatusMessage tone="error"` on every query/mutation                                                                                  | Manual (browser)                                                         |
+| Basic accessibility      | ✅     | Semantic headings, `alt`/`aria-label`s, visible focus rings, form `label`s                                                            | `pnpm lighthouse` — 100/100 accessibility as of last local run           |
+| A few meaningful tests   | ✅     | [`apps/api/src/__tests__/`](../apps/api/src/__tests__/) (10), [`StayCard.test.tsx`](../apps/web/src/components/StayCard.test.tsx) (2) | `pnpm test`                                                              |
+| Simple CI pipeline       | ✅     | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) — format, lint, fallow audit, typecheck, test, build                        | CI run on push/PR                                                        |
+| Production build process | ✅     | `pnpm build`                                                                                                                          | Verified locally + in CI                                                 |
 
 ## Optional
 
