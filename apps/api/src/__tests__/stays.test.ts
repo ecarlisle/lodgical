@@ -1,0 +1,60 @@
+import request from "supertest";
+import { describe, expect, it } from "vitest";
+import { createApp } from "../app";
+
+const app = createApp();
+
+describe("GET /stays", () => {
+  it("returns the seeded list of stays", async () => {
+    const response = await request(app).get("/stays");
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body)).toBe(true);
+    expect(response.body.length).toBeGreaterThan(0);
+  });
+
+  it("filters by location", async () => {
+    const response = await request(app).get("/stays").query({ location: "Lisbon" });
+    expect(response.status).toBe(200);
+    expect(response.body.every((stay: { location: string }) =>
+      stay.location.toLowerCase().includes("lisbon"),
+    )).toBe(true);
+  });
+});
+
+describe("GET /stays/:id", () => {
+  it("returns 404 for an unknown stay", async () => {
+    const response = await request(app).get("/stays/does-not-exist");
+    expect(response.status).toBe(404);
+  });
+
+  it("returns the stay for a known id", async () => {
+    const response = await request(app).get("/stays/stay-1");
+    expect(response.status).toBe(200);
+    expect(response.body.id).toBe("stay-1");
+  });
+});
+
+describe("POST /stays/:id/reviews", () => {
+  it("adds a review and reflects it in the review list", async () => {
+    const response = await request(app).post("/stays/stay-2/reviews").send({
+      author: "Test User",
+      rating: 5,
+      comment: "Great stay!",
+    });
+    expect(response.status).toBe(201);
+
+    const reviews = await request(app).get("/stays/stay-2/reviews");
+    expect(
+      reviews.body.some((review: { comment: string }) => review.comment === "Great stay!"),
+    ).toBe(true);
+  });
+
+  it("rejects an invalid review payload", async () => {
+    const response = await request(app).post("/stays/stay-2/reviews").send({
+      author: "",
+      rating: 10,
+      comment: "",
+    });
+    expect(response.status).toBe(400);
+  });
+});

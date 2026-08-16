@@ -1,0 +1,12 @@
+.message {
+  padding: var(--spacing-3);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.message[data-tone="error"] {
+  background: #fbeceb;
+  color: var(--color-danger);
+}

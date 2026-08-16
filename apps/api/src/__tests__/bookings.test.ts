@@ -1,0 +1,55 @@
+import request from "supertest";
+import { describe, expect, it } from "vitest";
+import { createApp } from "../app";
+
+const app = createApp();
+
+describe("POST /bookings", () => {
+  it("creates a booking and computes the total price", async () => {
+    const response = await request(app).post("/bookings").send({
+      stayId: "stay-1",
+      guestName: "Ada Lovelace",
+      email: "ada@example.com",
+      checkIn: "2026-09-01",
+      checkOut: "2026-09-04",
+      guests: 2,
+    });
+
+    expect(response.status).toBe(201);
+    expect(response.body.status).toBe("confirmed");
+    expect(response.body.totalPrice).toBe(3 * 120);
+  });
+
+  it("rejects a checkout before check-in", async () => {
+    const response = await request(app).post("/bookings").send({
+      stayId: "stay-1",
+      guestName: "Ada Lovelace",
+      email: "ada@example.com",
+      checkIn: "2026-09-04",
+      checkOut: "2026-09-01",
+      guests: 2,
+    });
+
+    expect(response.status).toBe(400);
+  });
+
+  it("returns 404 for an unknown stay", async () => {
+    const response = await request(app).post("/bookings").send({
+      stayId: "does-not-exist",
+      guestName: "Ada Lovelace",
+      email: "ada@example.com",
+      checkIn: "2026-09-01",
+      checkOut: "2026-09-04",
+      guests: 2,
+    });
+
+    expect(response.status).toBe(404);
+  });
+});
+
+describe("GET /bookings/:id", () => {
+  it("returns 404 for an unknown booking", async () => {
+    const response = await request(app).get("/bookings/does-not-exist");
+    expect(response.status).toBe(404);
+  });
+});

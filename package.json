@@ -1,0 +1,25 @@
+{
+  "name": "lodgical",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A small travel booking application",
+  "license": "ISC",
+  "packageManager": "pnpm@10.34.4",
+  "scripts": {
+    "dev:web": "pnpm --filter @lodgical/web dev",
+    "dev:api": "pnpm --filter @lodgical/api dev",
+    "build": "pnpm --filter @lodgical/shared build && pnpm --filter @lodgical/api build && pnpm --filter @lodgical/web build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "typescript-eslint": "^8.12.2"
+  }
+}
