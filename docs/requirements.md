@@ -17,7 +17,7 @@ We recommend spending 4–6 hours on the assessment. Please treat this as a firm
 2. Clean code
 3. Reasoning we can follow
 
-If there are features you didn't get to or decisions you would revisit, document them in your [README](../readme.MD); a clear, well-reasoned account of what's left is a meaningful part of your submission.
+If there are features you didn't get to or decisions you would revisit, document them in your [README](../README.md); a clear, well-reasoned account of what's left is a meaningful part of your submission.
 
 ## The Assessment
 
@@ -66,7 +66,7 @@ Optional, but always appreciated:
 Please send us:
 
 1. A Git repository containing both the frontend and backend
-1. A README covering:
+1. A [README](../README.md) covering:
    a. Setup instructions
    b. Available scripts
    c. Architecture decisions
