@@ -71,6 +71,76 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     maxGuests: 2,
     amenities: ["Wifi", "Pool access", "Parking"],
   },
+  {
+    id: "stay-6",
+    title: "Harbor View Flat",
+    location: "Sydney, Australia",
+    description:
+      "A bright top-floor flat overlooking the harbor, a short ferry ride from the city center.",
+    images: [
+      "https://picsum.photos/seed/lodgical-6a/800/600",
+      "https://picsum.photos/seed/lodgical-6b/800/600",
+    ],
+    pricePerNight: 165,
+    maxGuests: 4,
+    amenities: ["Wifi", "Balcony", "Air conditioning", "Elevator"],
+  },
+  {
+    id: "stay-7",
+    title: "Alpine Chalet",
+    location: "Zermatt, Switzerland",
+    description:
+      "A ski-in/ski-out chalet with a sauna and unobstructed views of the Matterhorn.",
+    images: [
+      "https://picsum.photos/seed/lodgical-7a/800/600",
+      "https://picsum.photos/seed/lodgical-7b/800/600",
+    ],
+    pricePerNight: 320,
+    maxGuests: 8,
+    amenities: ["Wifi", "Sauna", "Fireplace", "Ski storage", "Parking"],
+  },
+  {
+    id: "stay-8",
+    title: "Rice Terrace Bungalow",
+    location: "Ubud, Bali, Indonesia",
+    description:
+      "An open-air bungalow surrounded by working rice terraces, ten minutes from central Ubud.",
+    images: [
+      "https://picsum.photos/seed/lodgical-8a/800/600",
+      "https://picsum.photos/seed/lodgical-8b/800/600",
+    ],
+    pricePerNight: 65,
+    maxGuests: 2,
+    amenities: ["Wifi", "Pool access", "Breakfast included"],
+  },
+  {
+    id: "stay-9",
+    title: "Brownstone Suite",
+    location: "Brooklyn, New York",
+    description:
+      "A garden-level suite in a landmarked brownstone, on a quiet tree-lined block near the park.",
+    images: [
+      "https://picsum.photos/seed/lodgical-9a/800/600",
+      "https://picsum.photos/seed/lodgical-9b/800/600",
+    ],
+    pricePerNight: 245,
+    maxGuests: 3,
+    amenities: ["Wifi", "Kitchen", "Washer", "Private entrance"],
+  },
+  {
+    id: "stay-10",
+    title: "Lakeside Bothy",
+    location: "Lake District, England",
+    description:
+      "A one-room stone bothy on the water's edge, with a rowboat included and no wifi by design.",
+    images: [
+      "https://picsum.photos/seed/lodgical-10a/800/600",
+      "https://picsum.photos/seed/lodgical-10b/800/600",
+    ],
+    pricePerNight: 110,
+    maxGuests: 2,
+    amenities: ["Fireplace", "Rowboat", "Parking"],
+  },
 ];
 
 export const seedReviews: Review[] = [
@@ -114,5 +184,74 @@ export const seedReviews: Review[] = [
     comment:
       "Stunning house, stairs are steep though — heads up for anyone with mobility concerns.",
     createdAt: "2026-05-28T14:45:00.000Z",
+  },
+  {
+    id: "review-6",
+    stayId: "stay-6",
+    author: "Noah",
+    rating: 5,
+    comment: "Watched the ferries go by from bed. Worth every dollar.",
+    createdAt: "2026-02-09T08:20:00.000Z",
+  },
+  {
+    id: "review-7",
+    stayId: "stay-6",
+    author: "Aroha",
+    rating: 3,
+    comment: "Nice flat but the elevator was out for two of our five nights.",
+    createdAt: "2026-06-01T12:00:00.000Z",
+  },
+  {
+    id: "review-8",
+    stayId: "stay-7",
+    author: "Freddy",
+    rating: 5,
+    comment:
+      "Ski-in/ski-out is not an exaggeration. The sauna after a powder day was unreal.",
+    createdAt: "2026-01-18T19:45:00.000Z",
+  },
+  {
+    id: "review-9",
+    stayId: "stay-7",
+    author: "Elin",
+    rating: 4,
+    comment:
+      "Pricey but the location can't be beat. Book the transfer in advance.",
+    createdAt: "2026-02-22T16:10:00.000Z",
+  },
+  {
+    id: "review-10",
+    stayId: "stay-8",
+    author: "Wayan",
+    rating: 5,
+    comment: "Fell asleep to frogs and woke up to the terraces in mist. Magic.",
+    createdAt: "2026-07-03T07:30:00.000Z",
+  },
+  {
+    id: "review-11",
+    stayId: "stay-9",
+    author: "Dev",
+    rating: 4,
+    comment:
+      "Classic Brooklyn brownstone charm, quiet block, close to the subway.",
+    createdAt: "2026-03-30T11:00:00.000Z",
+  },
+  {
+    id: "review-12",
+    stayId: "stay-9",
+    author: "Rachel",
+    rating: 2,
+    comment:
+      "Charming but the garden-level windows meant very little natural light.",
+    createdAt: "2026-04-11T15:20:00.000Z",
+  },
+  {
+    id: "review-13",
+    stayId: "stay-10",
+    author: "Oliver",
+    rating: 5,
+    comment:
+      "Exactly the unplugged weekend we wanted. The rowboat made the trip.",
+    createdAt: "2026-05-16T09:00:00.000Z",
   },
 ];
