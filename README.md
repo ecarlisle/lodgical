@@ -129,6 +129,7 @@ Run everything with `pnpm test`, or scope to one app with `pnpm --filter @lodgic
 - A more capable search (price range and date pickers wired into the query, not just location/guests).
 - Persisting data to a real database (e.g. SQLite via Prisma) instead of the in-memory store.
 - Deployment (e.g. Vercel for the frontend, Render for the API) and basic request logging/observability.
+- A headless component system (e.g. Radix UI Primitives, React Aria) for any new interactive widgets that need real accessible-interaction behavior — a date-range picker for search/checkout, a combobox for location. It ships behavior and accessibility only, no styling engine, so it stays compatible with the plain-CSS-Modules convention rather than replacing it. Not adopted now because the current forms are native `<input>`/`<select>` elements that don't need it — worth pulling in only alongside a widget that actually justifies it.
 
 ## Use of AI/LLMs
 
