@@ -1,12 +1,39 @@
-.summary {
-  color: var(--color-text-muted);
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--spacing-4);
+  align-items: start;
 }
 
-.form {
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detailsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.card {
+  padding: var(--spacing-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);
-  max-width: 480px;
+}
+
+.card h2 {
+  margin: 0;
+}
+
+.mockNotice {
+  margin: calc(var(--spacing-3) * -1) 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
 }
 
 .row {
@@ -27,7 +54,7 @@
 .field input {
   padding: var(--spacing-2);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
 }
 
 .error {
@@ -35,25 +62,54 @@
   font-size: 0.85rem;
 }
 
+.summaryColumn {
+  position: sticky;
+  top: var(--spacing-4);
+}
+
+.summaryCard {
+  padding: var(--spacing-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.summaryCard h2 {
+  margin: 0;
+}
+
+.summaryStay {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
 .total {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   padding: var(--spacing-3);
   background: var(--color-surface);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
+}
+
+.total strong {
+  font: var(--font-price);
 }
 
 .submit {
   padding: var(--spacing-3);
-  background: var(--color-primary);
-  color: white;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
   border: none;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   font-weight: 600;
 }
 
 .submit:hover {
-  background: var(--color-primary-hover);
+  background: var(--color-accent-hover);
 }
 
 .submit:disabled {

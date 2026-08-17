@@ -99,7 +99,10 @@ export function StayDetailPage() {
               <li key={review.id} className={styles.review}>
                 <div className={styles.reviewHeader}>
                   <strong>{review.author}</strong>
-                  <span aria-label={`Rated ${review.rating} out of 5`}>
+                  <span
+                    className={styles.rating}
+                    aria-label={`Rated ${review.rating} out of 5`}
+                  >
                     ★ {review.rating}
                   </span>
                 </div>

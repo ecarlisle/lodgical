@@ -14,6 +14,7 @@
     "lighthouse:run": "lighthouse http://localhost:4173 --output=html --output-path=./lighthouse-report.html --chrome-flags=\"--headless=new\" --quiet"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.1.0",
     "@lodgical/shared": "workspace:*",
     "@tanstack/react-query": "^5.59.16",
     "react": "^19.2.8",

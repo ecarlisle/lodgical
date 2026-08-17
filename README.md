@@ -112,6 +112,7 @@ Run everything with `pnpm test`, or scope to one app with `pnpm --filter @lodgic
 - **Zod schemas in `packages/shared`** validate both the API's request bodies and the frontend's forms from one source of truth, so the two layers can't drift apart.
 - **Express** over a heavier framework — minimal ceremony for a handful of routes.
 - **[Fallow](https://github.com/fallow-rs/fallow) as a changed-file quality gate** alongside ESLint/Prettier — ESLint catches per-file correctness issues, Fallow catches cross-file ones (dead exports, circular deps, duplication, complexity) that a linter can't see. Scoped to changed files in CI so it grades this PR, not the whole codebase's pre-existing state.
+- **Design tokens adopted from a Google Stitch mockup** ("Global Horizon": Trust Blue `#003580` nav/brand, Action Blue `#006CE4` secondary actions, Attention Yellow `#FFB700` reserved for primary CTAs, Inter via `@fontsource` self-hosted rather than a Google Fonts runtime link) — applied as CSS custom properties in `index.css`, which is a pure drop-in for the existing CSS Modules convention. Only the checkout page's layout was restructured to match the mockup (two-column, sticky summary card, mocked payment section); no other new screens or navigation changes were invented beyond what the one available mockup screen actually showed.
 
 ## Tradeoffs
 
