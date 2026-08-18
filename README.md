@@ -57,6 +57,7 @@ Run from the repo root:
 | `pnpm lint`         | Lint all packages                                                                                |
 | `pnpm typecheck`    | Typecheck all packages                                                                           |
 | `pnpm test`         | Run all tests                                                                                    |
+| `pnpm test:netlify` | Build the Netlify deployment bundle and smoke-test its packaged API function                     |
 | `pnpm format`       | Format all files with Prettier                                                                   |
 | `pnpm format:check` | Check formatting without writing (used in CI)                                                    |
 | `pnpm build`        | Production build of shared, api, and web                                                         |
@@ -64,7 +65,10 @@ Run from the repo root:
 | `pnpm fallow`       | Full static-analysis pipeline (dead code, duplication, health) over the whole repo               |
 | `pnpm fallow:audit` | Gated check: fails only on issues introduced by files changed vs. the base branch (what CI runs) |
 
-CI (`.github/workflows/ci.yml`) runs `format:check`, `lint`, `fallow:audit`, `typecheck`, `test`, and `build` on every push and pull request.
+CI (`.github/workflows/ci.yml`) runs `format:check`, `lint`, `fallow:audit`,
+`typecheck`, `test`, `build`, and the packaged Netlify API smoke test on every
+push and pull request. A separate non-blocking job runs Lighthouse and uploads
+its report.
 
 `pnpm lighthouse` builds `apps/web`, serves the build with `vite preview`, runs [Lighthouse](https://developer.chrome.com/docs/lighthouse) against it headlessly, and writes `apps/web/lighthouse-report.html` (gitignored — open it in a browser to view). It audits performance, accessibility, best practices, and SEO against the production build, not the dev server. You may see a stray `ELIFECYCLE Command failed` line at the end of the output — that's just the preview server being killed once the audit finishes, not an actual failure; check the script's exit code or the generated report, not that line.
 
@@ -130,7 +134,10 @@ persistent database before treating the deployment as production-ready.
 - **Zod schemas in `packages/shared`** validate both the API's request bodies and the frontend's forms from one source of truth, so the two layers can't drift apart.
 - **Express** over a heavier framework — minimal ceremony for a handful of routes.
 - **[Fallow](https://github.com/fallow-rs/fallow) as a changed-file quality gate** alongside ESLint/Prettier — ESLint catches per-file correctness issues, Fallow catches cross-file ones (dead exports, circular deps, duplication, complexity) that a linter can't see. Scoped to changed files in CI so it grades this PR, not the whole codebase's pre-existing state.
-- **Design tokens adopted from a Google Stitch mockup** ("Global Horizon": Trust Blue `#003580` nav/brand, Action Blue `#006CE4` secondary actions, Attention Yellow `#FFB700` reserved for primary CTAs, Inter via `@fontsource` self-hosted rather than a Google Fonts runtime link) — applied as CSS custom properties in `index.css`, which is a pure drop-in for the existing CSS Modules convention. Only the checkout page's layout was restructured to match the mockup (two-column, sticky summary card, mocked payment section); no other new screens or navigation changes were invented beyond what the one available mockup screen actually showed.
+- **A restrained coastal design system** (deep evergreen structure, terracotta
+  actions, warm-sand surfaces, and self-hosted Inter via `@fontsource`) —
+  applied as CSS custom properties in `index.css` and consumed by the existing
+  CSS Modules convention.
 - **Date availability as an end-to-end search concern** — the search page uses one accessible range-calendar interaction, stores the range in the URL, carries it through stay details into checkout, and sends it to the API. The API treats stays as half-open date intervals (`checkIn` inclusive, `checkOut` exclusive), so a new guest may check in on the previous guest's checkout date while true overlaps are filtered and rejected.
 
 ## Tradeoffs
@@ -148,7 +155,7 @@ persistent database before treating the deployment as production-ready.
 - Pagination or infinite scroll on the search results.
 - A more capable search with user-facing price filters and fuzzy location matching.
 - Persisting data to a real database (e.g. SQLite via Prisma) instead of the in-memory store.
-- Deployment (e.g. Vercel for the frontend, Render for the API) and basic request logging/observability.
+- Durable deployment data, health monitoring, and basic request logging/observability.
 
 ## Use of AI/LLMs
 

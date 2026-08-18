@@ -41,8 +41,71 @@
   padding: var(--spacing-4);
 }
 
+.footer {
+  margin-top: var(--spacing-5);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.footerInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--spacing-3) var(--spacing-4);
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-4);
+}
+
+.footerBrand {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  color: var(--color-primary);
+}
+
+.footerBrand p,
+.footerMeta {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.footerWordmark {
+  display: block;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.footerNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.footerNav a {
+  font-weight: 600;
+}
+
+.footerMeta {
+  grid-column: 1 / -1;
+  padding-top: var(--spacing-3);
+  border-top: 1px solid var(--color-border);
+  font-size: 0.85rem;
+}
+
 @media (max-width: 640px) {
   .main {
     padding: var(--spacing-3);
+  }
+
+  .footerInner {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-4) var(--spacing-3);
+  }
+
+  .footerMeta {
+    grid-column: auto;
   }
 }

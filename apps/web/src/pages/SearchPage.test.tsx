@@ -45,4 +45,59 @@ describe("SearchPage", () => {
       expect(fetchStays).toHaveBeenLastCalledWith({ location: "Lisbon" }),
     );
   });
+
+  it("shows a loading state while stays are being fetched", () => {
+    vi.mocked(fetchStays).mockReturnValue(new Promise(() => undefined));
+
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SearchPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(screen.getByText("Loading stays…")).toBeInTheDocument();
+  });
+
+  it("shows an empty state when no stays match", async () => {
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SearchPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(
+      await screen.findByText("No stays match your search."),
+    ).toBeInTheDocument();
+  });
+
+  it("shows an error state when stays cannot be loaded", async () => {
+    vi.mocked(fetchStays).mockRejectedValue(new Error("API unavailable"));
+
+    const queryClient = new QueryClient({
+      defaultOptions: { queries: { retry: false } },
+    });
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <SearchPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expect(
+      await screen.findByText(
+        "Something went wrong loading stays. Please try again.",
+      ),
+    ).toBeInTheDocument();
+  });
 });
