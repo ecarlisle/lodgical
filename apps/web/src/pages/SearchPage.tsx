@@ -161,23 +161,24 @@ function SearchResults({
 
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState<StaySearchQuery>(() =>
-    readSearchQuery(searchParams),
-  );
+  const query = readSearchQuery(searchParams);
   const staysQuery = useQuery({
     queryKey: ["stays", query],
     queryFn: () => fetchStays(query),
   });
 
   function handleSearch(nextQuery: StaySearchQuery) {
-    setQuery(nextQuery);
     setSearchParams(toSearchParams(nextQuery));
   }
 
   return (
     <div>
       <h1>Find your next stay</h1>
-      <SearchForm initialQuery={query} onSearch={handleSearch} />
+      <SearchForm
+        key={toSearchParams(query).toString()}
+        initialQuery={query}
+        onSearch={handleSearch}
+      />
       <SearchResults query={query} {...staysQuery} />
     </div>
   );

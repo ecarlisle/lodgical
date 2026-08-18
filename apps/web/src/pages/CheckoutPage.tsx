@@ -6,6 +6,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { createBooking, fetchStay } from "../api/stays";
 import { StatusMessage } from "../components/StatusMessage";
+import { nextCalendarDate } from "../utils/dateRange";
 import styles from "./CheckoutPage.module.css";
 
 const bookingFieldsSchema = createBookingObjectSchema.omit({ stayId: true });
@@ -127,7 +128,7 @@ export function CheckoutPage() {
                 <input
                   id="checkOut"
                   type="date"
-                  min={checkIn || undefined}
+                  min={nextCalendarDate(checkIn)}
                   {...register("checkOut")}
                 />
                 {errors.checkOut && (
