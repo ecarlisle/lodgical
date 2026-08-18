@@ -136,7 +136,7 @@ export function DateRangeField({
   return (
     <div className={styles.field} ref={containerRef}>
       <span className={styles.label} id="dates-label">
-        Dates
+        When
       </span>
       <button
         ref={triggerRef}

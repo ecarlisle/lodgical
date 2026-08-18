@@ -90,7 +90,7 @@ function SearchForm({ initialQuery, onSearch }: SearchFormProps) {
         }}
       />
       <div className={styles.field}>
-        <label htmlFor="guests">Who</label>
+        <label htmlFor="guests">How many</label>
         <input
           id="guests"
           name="guests"
