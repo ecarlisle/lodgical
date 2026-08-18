@@ -8,8 +8,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "A whitewashed cottage two minutes from the beach, with a private patio and morning sun.",
     images: [
-      "https://picsum.photos/seed/lodgical-1a/800/600",
-      "https://picsum.photos/seed/lodgical-1b/800/600",
+      "https://images.unsplash.com/photo-1510069551606-f9ec0a62fe28?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1686950429623-abb1ef6ea8e8?w=800&h=600&fit=crop",
     ],
     pricePerNight: 120,
     maxGuests: 4,
@@ -22,8 +22,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "An industrial-style loft in Kreuzberg, walking distance to cafes, galleries, and the river.",
     images: [
-      "https://picsum.photos/seed/lodgical-2a/800/600",
-      "https://picsum.photos/seed/lodgical-2b/800/600",
+      "https://images.unsplash.com/photo-1643335125507-c99b6f2414d3?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1585492197563-572494c5ff0f?w=800&h=600&fit=crop",
     ],
     pricePerNight: 95,
     maxGuests: 2,
@@ -36,8 +36,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "A timber cabin at the edge of the forest, with a wood stove and a wraparound deck.",
     images: [
-      "https://picsum.photos/seed/lodgical-3a/800/600",
-      "https://picsum.photos/seed/lodgical-3b/800/600",
+      "https://images.unsplash.com/photo-1637687222430-ca092fb9062a?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1602331407936-58a39a558710?w=800&h=600&fit=crop",
     ],
     pricePerNight: 180,
     maxGuests: 6,
@@ -50,8 +50,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "A narrow 17th-century canal house, fully restored, with original beams and a rooftop view.",
     images: [
-      "https://picsum.photos/seed/lodgical-4a/800/600",
-      "https://picsum.photos/seed/lodgical-4b/800/600",
+      "https://images.unsplash.com/photo-1583295125721-766a0088cd3f?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1519475889208-0968e5438f7d?w=800&h=600&fit=crop",
     ],
     pricePerNight: 210,
     maxGuests: 3,
@@ -64,8 +64,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "A quiet adobe casita with a private courtyard, built for stargazing and long, slow mornings.",
     images: [
-      "https://picsum.photos/seed/lodgical-5a/800/600",
-      "https://picsum.photos/seed/lodgical-5b/800/600",
+      "https://images.unsplash.com/photo-1738208400122-e7d246b226ae?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1695182622851-a755066e9d89?w=800&h=600&fit=crop",
     ],
     pricePerNight: 85,
     maxGuests: 2,
@@ -78,8 +78,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "A bright top-floor flat overlooking the harbor, a short ferry ride from the city center.",
     images: [
-      "https://picsum.photos/seed/lodgical-6a/800/600",
-      "https://picsum.photos/seed/lodgical-6b/800/600",
+      "https://images.unsplash.com/photo-1605578460278-14a28bf273b4?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1746891522750-254688aeceb2?w=800&h=600&fit=crop",
     ],
     pricePerNight: 165,
     maxGuests: 4,
@@ -92,8 +92,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "A ski-in/ski-out chalet with a sauna and unobstructed views of the Matterhorn.",
     images: [
-      "https://picsum.photos/seed/lodgical-7a/800/600",
-      "https://picsum.photos/seed/lodgical-7b/800/600",
+      "https://images.unsplash.com/photo-1773529393844-879b068218db?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1623451680386-0bb3ab60a8ff?w=800&h=600&fit=crop",
     ],
     pricePerNight: 320,
     maxGuests: 8,
@@ -106,8 +106,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "An open-air bungalow surrounded by working rice terraces, ten minutes from central Ubud.",
     images: [
-      "https://picsum.photos/seed/lodgical-8a/800/600",
-      "https://picsum.photos/seed/lodgical-8b/800/600",
+      "https://images.unsplash.com/photo-1569881347427-c861051db3f9?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1652407782575-3f5805f9d220?w=800&h=600&fit=crop",
     ],
     pricePerNight: 65,
     maxGuests: 2,
@@ -120,8 +120,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "A garden-level suite in a landmarked brownstone, on a quiet tree-lined block near the park.",
     images: [
-      "https://picsum.photos/seed/lodgical-9a/800/600",
-      "https://picsum.photos/seed/lodgical-9b/800/600",
+      "https://images.unsplash.com/photo-1698248476376-f28f8869b622?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1641217658611-5ffbcde46b61?w=800&h=600&fit=crop",
     ],
     pricePerNight: 245,
     maxGuests: 3,
@@ -134,8 +134,8 @@ export const seedStays: Omit<Stay, "rating" | "reviewCount">[] = [
     description:
       "A one-room stone bothy on the water's edge, with a rowboat included and no wifi by design.",
     images: [
-      "https://picsum.photos/seed/lodgical-10a/800/600",
-      "https://picsum.photos/seed/lodgical-10b/800/600",
+      "https://images.unsplash.com/photo-1693639283363-eaca2875819d?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1639422817663-a6caef81d114?w=800&h=600&fit=crop",
     ],
     pricePerNight: 110,
     maxGuests: 2,
