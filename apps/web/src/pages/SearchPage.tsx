@@ -49,6 +49,8 @@ function SearchForm({ initialQuery, onSearch }: SearchFormProps) {
     const form = new FormData(event.currentTarget);
     const location = String(form.get("location") ?? "").trim();
     const guests = Number(form.get("guests"));
+    const minPrice = Number(form.get("minPrice"));
+    const maxPrice = Number(form.get("maxPrice"));
 
     if (dates.checkIn && !dates.checkOut) {
       setDateError("Choose a checkout date to search availability.");
@@ -58,6 +60,8 @@ function SearchForm({ initialQuery, onSearch }: SearchFormProps) {
     const nextQuery: StaySearchQuery = {
       location: location || undefined,
       guests: guests > 0 ? guests : undefined,
+      minPrice: minPrice >= 0 && form.get("minPrice") ? minPrice : undefined,
+      maxPrice: maxPrice > 0 ? maxPrice : undefined,
       checkIn: dates.checkIn,
       checkOut: dates.checkOut,
     };
@@ -68,12 +72,12 @@ function SearchForm({ initialQuery, onSearch }: SearchFormProps) {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.field}>
-        <label htmlFor="location">Location</label>
+        <label htmlFor="location">Where</label>
         <input
           id="location"
           name="location"
           type="text"
-          placeholder="e.g. Lisbon"
+          placeholder="City or destination"
           defaultValue={initialQuery.location}
         />
       </div>
@@ -86,7 +90,7 @@ function SearchForm({ initialQuery, onSearch }: SearchFormProps) {
         }}
       />
       <div className={styles.field}>
-        <label htmlFor="guests">Guests</label>
+        <label htmlFor="guests">Who</label>
         <input
           id="guests"
           name="guests"
@@ -96,8 +100,50 @@ function SearchForm({ initialQuery, onSearch }: SearchFormProps) {
         />
       </div>
       <button type="submit" className={styles.submit}>
-        Search
+        Search stays
       </button>
+      <details className={styles.filters}>
+        <summary>
+          Price per night
+          {(initialQuery.minPrice !== undefined ||
+            initialQuery.maxPrice !== undefined) && (
+            <span className={styles.filterCount}>1</span>
+          )}
+        </summary>
+        <div className={styles.priceFields}>
+          <div className={styles.field}>
+            <label htmlFor="minPrice">Minimum</label>
+            <div className={styles.moneyInput}>
+              <span aria-hidden="true">$</span>
+              <input
+                id="minPrice"
+                name="minPrice"
+                type="number"
+                min={0}
+                placeholder="0"
+                defaultValue={initialQuery.minPrice}
+              />
+            </div>
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="maxPrice">Maximum</label>
+            <div className={styles.moneyInput}>
+              <span aria-hidden="true">$</span>
+              <input
+                id="maxPrice"
+                name="maxPrice"
+                type="number"
+                min={1}
+                placeholder="Any"
+                defaultValue={initialQuery.maxPrice}
+              />
+            </div>
+          </div>
+          <button type="submit" className={styles.applyFilter}>
+            Apply price
+          </button>
+        </div>
+      </details>
     </form>
   );
 }
@@ -141,21 +187,39 @@ function SearchResults({
   }
 
   return (
-    <>
-      {hasDateRange && (
+    <section className={styles.results} aria-labelledby="results-heading">
+      <div className={styles.resultsHeader}>
+        <div>
+          <p className={styles.resultsEyebrow}>Places to stay</p>
+          <h2 id="results-heading">
+            {query.location
+              ? `Stays in ${query.location}`
+              : "Explore all stays"}
+          </h2>
+        </div>
         <p className={styles.availability} role="status">
-          {data.length} stay{data.length === 1 ? "" : "s"} available ·{" "}
-          {formatDateRangeSummary(query)}
+          <strong>
+            {data.length} stay{data.length === 1 ? "" : "s"}
+          </strong>
+          {hasDateRange
+            ? ` available · ${formatDateRangeSummary(query)}`
+            : " ready to explore"}
         </p>
-      )}
+      </div>
       <ul className={styles.grid}>
         {data.map((stay) => (
           <li key={stay.id}>
-            <StayCard stay={stay} search={resultSearch} />
+            <StayCard
+              stay={stay}
+              search={resultSearch}
+              availabilityLabel={
+                hasDateRange ? "Available for your dates" : undefined
+              }
+            />
           </li>
         ))}
       </ul>
-    </>
+    </section>
   );
 }
 
@@ -175,9 +239,20 @@ export function SearchPage() {
   }
 
   return (
-    <div>
-      <h1>Find your next stay</h1>
-      <SearchForm initialQuery={query} onSearch={handleSearch} />
+    <div className={styles.page}>
+      <section className={styles.hero} aria-labelledby="search-heading">
+        <div className={styles.heroContent}>
+          <p className={styles.eyebrow}>A considered place to land</p>
+          <h1 id="search-heading">Stay somewhere worth remembering.</h1>
+          <p>
+            Thoughtful homes, cabins, and city hideaways for the way you
+            actually travel.
+          </p>
+        </div>
+      </section>
+      <div className={styles.searchPanel}>
+        <SearchForm initialQuery={query} onSearch={handleSearch} />
+      </div>
       <SearchResults query={query} {...staysQuery} />
     </div>
   );

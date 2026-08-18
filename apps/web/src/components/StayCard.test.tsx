@@ -28,6 +28,8 @@ describe("StayCard", () => {
     expect(screen.getByText("Seaside Cottage")).toBeInTheDocument();
     expect(screen.getByText("Lisbon, Portugal")).toBeInTheDocument();
     expect(screen.getByText("$120")).toBeInTheDocument();
+    expect(screen.getByText(/Up to 4 guests/)).toBeInTheDocument();
+    expect(screen.getByText("12 reviews")).toBeInTheDocument();
   });
 
   it("links to the stay detail page", () => {
