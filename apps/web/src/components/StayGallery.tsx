@@ -6,6 +6,37 @@ type StayGalleryProps = {
   stayTitle: string;
 };
 
+function getFocusWrapTarget(
+  event: KeyboardEvent,
+  first: HTMLButtonElement,
+  last: HTMLButtonElement,
+) {
+  if (event.shiftKey) {
+    return document.activeElement === first ? last : null;
+  }
+
+  return document.activeElement === last ? first : null;
+}
+
+function trapDialogFocus(event: KeyboardEvent, dialog: HTMLDivElement | null) {
+  if (event.key !== "Tab") return;
+
+  const focusable = dialog?.querySelectorAll<HTMLButtonElement>(
+    "button:not(:disabled)",
+  );
+  if (!focusable?.length) return;
+
+  const target = getFocusWrapTarget(
+    event,
+    focusable[0],
+    focusable[focusable.length - 1],
+  );
+  if (!target) return;
+
+  event.preventDefault();
+  target.focus();
+}
+
 export function StayGallery({ images, stayTitle }: StayGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
@@ -32,42 +63,24 @@ export function StayGallery({ images, stayTitle }: StayGalleryProps) {
     closeButtonRef.current?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        closeGallery();
+      const galleryActions: Record<string, () => void> = {
+        Escape: closeGallery,
+        ArrowRight: () =>
+          setSelectedIndex((index) => (index + 1) % images.length),
+        ArrowLeft: () =>
+          setSelectedIndex(
+            (index) => (index - 1 + images.length) % images.length,
+          ),
+      };
+      const galleryAction = galleryActions[event.key];
+
+      if (!galleryAction) {
+        trapDialogFocus(event, dialogRef.current);
         return;
       }
 
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        setSelectedIndex((index) => (index + 1) % images.length);
-        return;
-      }
-
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        setSelectedIndex(
-          (index) => (index - 1 + images.length) % images.length,
-        );
-        return;
-      }
-
-      if (event.key !== "Tab") return;
-
-      const focusable = dialogRef.current?.querySelectorAll<HTMLButtonElement>(
-        "button:not(:disabled)",
-      );
-      if (!focusable?.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
+      event.preventDefault();
+      galleryAction();
     }
 
     document.addEventListener("keydown", handleKeyDown);

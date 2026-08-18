@@ -12,24 +12,31 @@ class ApiError extends Error {
   }
 }
 
-export async function apiRequest<T>(
-  path: string,
-  init?: RequestInit,
-): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, {
+function createRequestInit(init?: RequestInit): RequestInit {
+  return {
     ...init,
     headers: {
       "Content-Type": "application/json",
       ...init?.headers,
     },
-  });
+  };
+}
+
+async function createApiError(response: Response, path: string) {
+  const body = await response.json().catch(() => null);
+  const message = body?.message ?? `Request to ${path} failed`;
+
+  return new ApiError(message, response.status);
+}
+
+export async function apiRequest<T>(
+  path: string,
+  init?: RequestInit,
+): Promise<T> {
+  const response = await fetch(`${API_URL}${path}`, createRequestInit(init));
 
   if (!response.ok) {
-    const body = await response.json().catch(() => null);
-    throw new ApiError(
-      body?.message ?? `Request to ${path} failed`,
-      response.status,
-    );
+    throw await createApiError(response, path);
   }
 
   return response.json() as Promise<T>;
