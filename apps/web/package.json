@@ -15,12 +15,13 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.0",
+    "@hookform/resolvers": "^3.9.0",
     "@lodgical/shared": "workspace:*",
     "@tanstack/react-query": "^5.59.16",
     "react": "^19.2.8",
+    "react-day-picker": "^10.0.1",
     "react-dom": "^19.2.8",
     "react-hook-form": "^7.53.1",
-    "@hookform/resolvers": "^3.9.0",
     "react-router-dom": "^6.27.0",
     "zod": "^3.23.8"
   },

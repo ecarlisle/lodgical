@@ -8,6 +8,13 @@ export class NotFoundError extends Error {
   }
 }
 
+export class ConflictError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ConflictError";
+  }
+}
+
 export function errorHandler(
   err: unknown,
   _req: Request,
@@ -21,6 +28,10 @@ export function errorHandler(
   }
   if (err instanceof NotFoundError) {
     res.status(404).json({ message: err.message });
+    return;
+  }
+  if (err instanceof ConflictError) {
+    res.status(409).json({ message: err.message });
     return;
   }
   console.error(err);

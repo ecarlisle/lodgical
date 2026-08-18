@@ -4,11 +4,12 @@ import styles from "./StayCard.module.css";
 
 type StayCardProps = {
   stay: Stay;
+  search?: string;
 };
 
-export function StayCard({ stay }: StayCardProps) {
+export function StayCard({ stay, search = "" }: StayCardProps) {
   return (
-    <Link to={`/stays/${stay.id}`} className={styles.card}>
+    <Link to={`/stays/${stay.id}${search}`} className={styles.card}>
       <img
         src={stay.images[0]}
         alt=""

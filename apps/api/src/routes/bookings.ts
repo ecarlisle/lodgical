@@ -1,19 +1,27 @@
 import { Router } from "express";
 import { createBookingSchema } from "@lodgical/shared";
 import { createBooking, getBookingById } from "../data/store";
-import { NotFoundError } from "../middleware/errors";
+import { ConflictError, NotFoundError } from "../middleware/errors";
 
 export const bookingsRouter = Router();
 
 bookingsRouter.post("/", (req, res, next) => {
   try {
     const input = createBookingSchema.parse(req.body);
-    const booking = createBooking(input);
-    if (!booking) {
+    const result = createBooking(input);
+    if (result.status === "not-found") {
       next(new NotFoundError(`Stay ${input.stayId} not found`));
       return;
     }
-    res.status(201).json(booking);
+    if (result.status === "conflict") {
+      next(
+        new ConflictError(
+          "This stay is not available for the selected dates. Choose another date range.",
+        ),
+      );
+      return;
+    }
+    res.status(201).json(result.booking);
   } catch (error) {
     next(error);
   }
