@@ -47,6 +47,11 @@ export function listStays(query: StaySearchQuery): Stay[] {
         ? stay.pricePerNight <= query.maxPrice
         : true,
     )
+    .filter((stay) =>
+      query.checkIn && query.checkOut
+        ? isStayAvailable(stay.id, query.checkIn, query.checkOut)
+        : true,
+    )
     .map(toStay);
 }
 
@@ -74,9 +79,31 @@ export function addReview(stayId: string, input: CreateReviewInput): Review {
   return review;
 }
 
-export function createBooking(input: CreateBookingInput): Booking | undefined {
+function isStayAvailable(
+  stayId: string,
+  checkIn: string,
+  checkOut: string,
+): boolean {
+  return !bookings.some(
+    (booking) =>
+      booking.stayId === stayId &&
+      booking.status === "confirmed" &&
+      booking.checkIn < checkOut &&
+      booking.checkOut > checkIn,
+  );
+}
+
+type CreateBookingResult =
+  | { status: "created"; booking: Booking }
+  | { status: "not-found" }
+  | { status: "conflict" };
+
+export function createBooking(input: CreateBookingInput): CreateBookingResult {
   const stay = getStayById(input.stayId);
-  if (!stay) return undefined;
+  if (!stay) return { status: "not-found" };
+  if (!isStayAvailable(input.stayId, input.checkIn, input.checkOut)) {
+    return { status: "conflict" };
+  }
 
   const nights = Math.round(
     (new Date(input.checkOut).getTime() - new Date(input.checkIn).getTime()) /
@@ -96,7 +123,7 @@ export function createBooking(input: CreateBookingInput): Booking | undefined {
     createdAt: new Date().toISOString(),
   };
   bookings.push(booking);
-  return booking;
+  return { status: "created", booking };
 }
 
 export function getBookingById(id: string): Booking | undefined {

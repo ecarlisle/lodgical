@@ -39,4 +39,20 @@ describe("StayCard", () => {
 
     expect(screen.getByRole("link")).toHaveAttribute("href", "/stays/1");
   });
+
+  it("preserves search context in the stay detail link", () => {
+    render(
+      <MemoryRouter>
+        <StayCard
+          stay={stay}
+          search="?checkIn=2026-10-10&checkOut=2026-10-12&guests=2"
+        />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole("link")).toHaveAttribute(
+      "href",
+      "/stays/1?checkIn=2026-10-10&checkOut=2026-10-12&guests=2",
+    );
+  });
 });

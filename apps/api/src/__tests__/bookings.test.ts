@@ -20,6 +20,33 @@ describe("POST /bookings", () => {
     expect(response.body.totalPrice).toBe(3 * 120);
   });
 
+  it("rejects a booking that overlaps a confirmed booking", async () => {
+    const response = await request(app).post("/bookings").send({
+      stayId: "stay-1",
+      guestName: "Grace Hopper",
+      email: "grace@example.com",
+      checkIn: "2026-09-02",
+      checkOut: "2026-09-05",
+      guests: 1,
+    });
+
+    expect(response.status).toBe(409);
+    expect(response.body.message).toMatch(/not available/i);
+  });
+
+  it("allows a booking that starts on an earlier booking's checkout date", async () => {
+    const response = await request(app).post("/bookings").send({
+      stayId: "stay-1",
+      guestName: "Grace Hopper",
+      email: "grace@example.com",
+      checkIn: "2026-09-04",
+      checkOut: "2026-09-06",
+      guests: 1,
+    });
+
+    expect(response.status).toBe(201);
+  });
+
   it("rejects a checkout before check-in", async () => {
     const response = await request(app).post("/bookings").send({
       stayId: "stay-1",
