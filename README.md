@@ -11,6 +11,7 @@ A small travel booking app inspired by Booking.com: search stays, view details a
 - [Project structure](#project-structure)
 - [API](#api)
 - [Testing](#testing)
+- [Deployment](#deployment)
 - [Architecture decisions](#architecture-decisions)
 - [Tradeoffs](#tradeoffs)
 - [What I'd build next](#what-id-build-next)
@@ -102,6 +103,23 @@ Data is seeded in-memory (`apps/api/src/data/seed.ts`) — no database. Request/
 - **Frontend** (`apps/web`): component tests with Vitest + React Testing Library.
 
 Run everything with `pnpm test`, or scope to one app with `pnpm --filter @lodgical/web test` / `pnpm --filter @lodgical/api test`.
+
+## Deployment
+
+The repository is configured for a single-site Netlify deployment. Netlify
+builds the workspace with `pnpm build`, publishes `apps/web/dist`, serves the
+Express API through a function at `/api/*`, and rewrites client-side routes to
+the Vite entrypoint.
+
+To deploy from the Netlify UI, import the GitHub repository and leave the build
+settings on **Use configuration from netlify.toml**. The production frontend
+defaults to the same-origin `/api` endpoint; `VITE_API_URL` can still override
+that when deploying the API separately.
+
+The API intentionally uses in-memory data for this assessment. On Netlify,
+function instances are ephemeral, so newly added reviews and bookings are not
+durable and may not be available to a later function invocation. Use a
+persistent database before treating the deployment as production-ready.
 
 ## Architecture decisions
 
