@@ -4,18 +4,19 @@ import { staysRouter } from "./routes/stays";
 import { bookingsRouter } from "./routes/bookings";
 import { errorHandler } from "./middleware/errors";
 
-export function createApp() {
+export function createApp(basePath = "") {
   const app = express();
+  const route = (path: string) => `${basePath}${path}`;
 
   app.use(cors());
   app.use(express.json());
 
-  app.get("/health", (_req, res) => {
+  app.get(route("/health"), (_req, res) => {
     res.json({ status: "ok" });
   });
 
-  app.use("/stays", staysRouter);
-  app.use("/bookings", bookingsRouter);
+  app.use(route("/stays"), staysRouter);
+  app.use(route("/bookings"), bookingsRouter);
 
   app.use((_req, res) => {
     res.status(404).json({ message: "Not found" });

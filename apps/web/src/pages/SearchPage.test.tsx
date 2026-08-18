@@ -36,11 +36,11 @@ describe("SearchPage", () => {
       </QueryClientProvider>,
     );
 
-    expect(screen.getByLabelText("Location")).toHaveValue("Berlin");
+    expect(screen.getByLabelText("Where")).toHaveValue("Berlin");
 
     fireEvent.click(screen.getByRole("button", { name: "Back" }));
 
-    expect(screen.getByLabelText("Location")).toHaveValue("Lisbon");
+    expect(screen.getByLabelText("Where")).toHaveValue("Lisbon");
     await waitFor(() =>
       expect(fetchStays).toHaveBeenLastCalledWith({ location: "Lisbon" }),
     );

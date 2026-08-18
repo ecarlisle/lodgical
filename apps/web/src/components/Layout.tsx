@@ -1,4 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
+import { LogoMark } from "./LogoMark";
 import styles from "./Layout.module.css";
 
 export function Layout() {
@@ -7,7 +8,8 @@ export function Layout() {
       <header className={styles.header}>
         <div className={styles.headerInner}>
           <Link to="/" className={styles.brand}>
-            Lodgical
+            <LogoMark className={styles.logoMark} />
+            <span className={styles.wordmark}>Lodgical</span>
           </Link>
         </div>
       </header>

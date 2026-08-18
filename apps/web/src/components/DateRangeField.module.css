@@ -7,15 +7,19 @@
 }
 
 .label {
-  font-weight: 500;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .trigger {
   display: flex;
-  min-height: 38px;
+  min-height: 46px;
   align-items: center;
   gap: var(--spacing-2);
-  padding: var(--spacing-2);
+  padding: 10px 12px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   background: var(--color-bg);
@@ -68,7 +72,7 @@
 
 .calendar {
   --rdp-accent-color: var(--color-secondary);
-  --rdp-accent-background-color: #e8f2ff;
+  --rdp-accent-background-color: #f8e9e4;
   --rdp-day-height: 40px;
   --rdp-day-width: 40px;
   --rdp-day_button-height: 38px;
