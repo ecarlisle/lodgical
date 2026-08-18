@@ -9,7 +9,7 @@ export function Layout() {
         <div className={styles.headerInner}>
           <Link to="/" className={styles.brand}>
             <LogoMark className={styles.logoMark} />
-            <span>Lodgical</span>
+            <span className={styles.wordmark}>Lodgical</span>
           </Link>
         </div>
       </header>
