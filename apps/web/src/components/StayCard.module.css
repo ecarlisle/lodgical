@@ -2,17 +2,12 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   background: var(--color-bg);
-  transition: box-shadow 0.15s ease;
-}
-
-.card:hover,
-.card:focus-visible {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-card);
 }
 
 .image {
@@ -46,6 +41,10 @@
   justify-content: space-between;
   align-items: baseline;
   font-size: 0.9rem;
+}
+
+.star {
+  color: var(--color-rating);
 }
 
 .price {

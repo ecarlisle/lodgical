@@ -20,7 +20,10 @@ export function StayCard({ stay }: StayCardProps) {
         <p className={styles.location}>{stay.location}</p>
         <div className={styles.meta}>
           <span aria-label={`Rated ${stay.rating} out of 5`}>
-            ★ {stay.rating.toFixed(1)} ({stay.reviewCount})
+            <span className={styles.star} aria-hidden="true">
+              ★
+            </span>{" "}
+            {stay.rating.toFixed(1)} ({stay.reviewCount})
           </span>
           <span className={styles.price}>
             ${stay.pricePerNight}

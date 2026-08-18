@@ -26,7 +26,7 @@ export function BookingConfirmationPage() {
 
   return (
     <div className={styles.confirmation}>
-      <h1>Booking confirmed</h1>
+      <h1 className={styles.heading}>Booking confirmed</h1>
       <p>
         Thanks, {booking.guestName} — a confirmation was "sent" to{" "}
         {booking.email}.
@@ -41,7 +41,7 @@ export function BookingConfirmationPage() {
         <dt>Guests</dt>
         <dd>{booking.guests}</dd>
         <dt>Total paid</dt>
-        <dd>${booking.totalPrice}</dd>
+        <dd className={styles.total}>${booking.totalPrice}</dd>
       </dl>
       <Link to="/">Browse more stays</Link>
     </div>

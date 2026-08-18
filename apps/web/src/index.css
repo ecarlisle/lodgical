@@ -1,21 +1,47 @@
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+
 :root {
   color-scheme: light;
+
+  /* Global Horizon: brand */
+  --color-primary: #003580;
+  --color-primary-hover: #002561;
+  --color-secondary: #006ce4;
+  --color-secondary-hover: #0056b8;
+  --color-accent: #ffb700;
+  --color-accent-hover: #e0a600;
+  --color-on-accent: #1a1a1a;
+  --color-rating: #ffb700;
+  --color-success: #008009;
+  --color-danger: #d4111e;
+
+  /* Global Horizon: surfaces */
   --color-bg: #ffffff;
-  --color-surface: #f6f5f3;
-  --color-border: #e2e0db;
-  --color-text: #1c1b1a;
-  --color-text-muted: #6b6862;
-  --color-primary: #0f6d5c;
-  --color-primary-hover: #0b5346;
-  --color-danger: #b3261e;
-  --radius: 8px;
+  --color-surface: #f5f5f5;
+  --color-border: #e7e7e7;
+  --color-text: #1a1a1a;
+  --color-text-muted: #434651;
+
+  /* Global Horizon: shape + elevation */
+  --radius-sm: 4px;
+  --radius-lg: 8px;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  /* Global Horizon: spacing (4px base unit) */
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 16px;
   --spacing-4: 24px;
   --spacing-5: 40px;
-  --max-width: 1080px;
+  --max-width: 1140px;
+
+  /* Global Horizon: typography */
+  --font-price: 700 22px/28px inter, sans-serif;
   font-family:
+    Inter,
     system-ui,
     -apple-system,
     "Segoe UI",
@@ -31,11 +57,12 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
+  font-size: 14px;
   line-height: 1.5;
 }
 
 a {
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 button,
@@ -54,7 +81,7 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-secondary);
   outline-offset: 2px;
 }
 
@@ -62,6 +89,21 @@ h1,
 h2,
 h3 {
   line-height: 1.2;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 32px;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
 }
 
 img {
