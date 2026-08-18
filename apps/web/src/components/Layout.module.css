@@ -15,10 +15,17 @@
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
   font-weight: 700;
   font-size: 1.25rem;
   text-decoration: none;
   color: #ffffff;
+}
+
+.logoMark {
+  flex-shrink: 0;
 }
 
 .main {
