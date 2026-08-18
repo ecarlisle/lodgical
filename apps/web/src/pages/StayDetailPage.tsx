@@ -99,11 +99,11 @@ export function StayDetailPage() {
               <li key={review.id} className={styles.review}>
                 <div className={styles.reviewHeader}>
                   <strong>{review.author}</strong>
-                  <span
-                    className={styles.rating}
-                    aria-label={`Rated ${review.rating} out of 5`}
-                  >
-                    ★ {review.rating}
+                  <span aria-label={`Rated ${review.rating} out of 5`}>
+                    <span className={styles.star} aria-hidden="true">
+                      ★
+                    </span>{" "}
+                    {review.rating}
                   </span>
                 </div>
                 <p>{review.comment}</p>
@@ -146,10 +146,12 @@ export function StayDetailPage() {
           </div>
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || submitReview.isPending}
             className={styles.submit}
           >
-            {isSubmitting ? "Submitting…" : "Submit review"}
+            {isSubmitting || submitReview.isPending
+              ? "Submitting…"
+              : "Submit review"}
           </button>
           {submitReview.isError && (
             <StatusMessage tone="error">

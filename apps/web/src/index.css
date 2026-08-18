@@ -39,7 +39,7 @@
   --max-width: 1140px;
 
   /* Global Horizon: typography */
-  --font-price: 700 22px/28px Inter, sans-serif;
+  --font-price: 700 22px/28px inter, sans-serif;
   font-family:
     Inter,
     system-ui,
