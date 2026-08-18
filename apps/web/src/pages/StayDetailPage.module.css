@@ -80,7 +80,7 @@
   justify-content: space-between;
 }
 
-.rating {
+.star {
   color: var(--color-rating);
 }
 

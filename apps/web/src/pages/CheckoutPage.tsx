@@ -212,10 +212,12 @@ export function CheckoutPage() {
 
             <button
               type="submit"
-              disabled={isSubmitting || nights <= 0}
+              disabled={isSubmitting || booking.isPending || nights <= 0}
               className={styles.submit}
             >
-              {isSubmitting ? "Booking…" : "Confirm booking"}
+              {isSubmitting || booking.isPending
+                ? "Booking…"
+                : "Confirm booking"}
             </button>
 
             {booking.isError && (
