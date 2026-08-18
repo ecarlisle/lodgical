@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { calculateNights, formatDateRangeSummary } from "./dateRange";
+import {
+  calculateNights,
+  formatDateRangeSummary,
+  nextCalendarDate,
+} from "./dateRange";
 
 describe("date range helpers", () => {
   it("formats a complete range with its night count", () => {
@@ -13,5 +17,9 @@ describe("date range helpers", () => {
 
   it("calculates nights across a month boundary", () => {
     expect(calculateNights("2026-10-30", "2026-11-02")).toBe(3);
+  });
+
+  it("returns the following calendar date across a month boundary", () => {
+    expect(nextCalendarDate("2026-10-31")).toBe("2026-11-01");
   });
 });

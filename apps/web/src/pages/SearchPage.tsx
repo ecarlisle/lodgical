@@ -225,16 +225,13 @@ function SearchResults({
 
 export function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState<StaySearchQuery>(() =>
-    readSearchQuery(searchParams),
-  );
+  const query = readSearchQuery(searchParams);
   const staysQuery = useQuery({
     queryKey: ["stays", query],
     queryFn: () => fetchStays(query),
   });
 
   function handleSearch(nextQuery: StaySearchQuery) {
-    setQuery(nextQuery);
     setSearchParams(toSearchParams(nextQuery));
   }
 
@@ -251,7 +248,11 @@ export function SearchPage() {
         </div>
       </section>
       <div className={styles.searchPanel}>
-        <SearchForm initialQuery={query} onSearch={handleSearch} />
+        <SearchForm
+          key={toSearchParams(query).toString()}
+          initialQuery={query}
+          onSearch={handleSearch}
+        />
       </div>
       <SearchResults query={query} {...staysQuery} />
     </div>

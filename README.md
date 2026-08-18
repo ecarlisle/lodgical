@@ -86,14 +86,14 @@ packages/
 
 ## API
 
-| Method | Path                 | Description                                                             |
-| ------ | -------------------- | ----------------------------------------------------------------------- |
-| `GET`  | `/stays`             | List/search stays (`location`, `guests`, prices, `checkIn`, `checkOut`) |
-| `GET`  | `/stays/:id`         | Stay details                                                            |
-| `GET`  | `/stays/:id/reviews` | Reviews for a stay                                                      |
-| `POST` | `/stays/:id/reviews` | Add a review                                                            |
-| `POST` | `/bookings`          | Create a booking (checkout)                                             |
-| `GET`  | `/bookings/:id`      | Booking confirmation                                                    |
+| Method | Path                 | Description                                                                             |
+| ------ | -------------------- | --------------------------------------------------------------------------------------- |
+| `GET`  | `/stays`             | List/search stays (`location`, `guests`, `minPrice`, `maxPrice`, `checkIn`, `checkOut`) |
+| `GET`  | `/stays/:id`         | Stay details                                                                            |
+| `GET`  | `/stays/:id/reviews` | Reviews for a stay                                                                      |
+| `POST` | `/stays/:id/reviews` | Add a review                                                                            |
+| `POST` | `/bookings`          | Create a booking (checkout)                                                             |
+| `GET`  | `/bookings/:id`      | Booking confirmation                                                                    |
 
 Data is seeded in-memory (`apps/api/src/data/seed.ts`) — no database. Request/response bodies are validated with the Zod schemas in `packages/shared`; invalid input returns `400` with the Zod issue list, unknown resources return `404`.
 

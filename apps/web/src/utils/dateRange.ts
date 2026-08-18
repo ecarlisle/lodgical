@@ -17,6 +17,14 @@ function toDateString(date: Date): string {
   return `${year}-${month}-${day}`;
 }
 
+export function nextCalendarDate(value?: string): string | undefined {
+  const date = toDate(value);
+  if (!date) return undefined;
+
+  date.setDate(date.getDate() + 1);
+  return toDateString(date);
+}
+
 export function toDateSelection(range?: {
   from?: Date;
   to?: Date;
