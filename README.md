@@ -85,14 +85,14 @@ packages/
 
 ## API
 
-| Method | Path                 | Description                                                      |
-| ------ | -------------------- | ---------------------------------------------------------------- |
-| `GET`  | `/stays`             | List/search stays (`location`, `guests`, `minPrice`, `maxPrice`) |
-| `GET`  | `/stays/:id`         | Stay details                                                     |
-| `GET`  | `/stays/:id/reviews` | Reviews for a stay                                               |
-| `POST` | `/stays/:id/reviews` | Add a review                                                     |
-| `POST` | `/bookings`          | Create a booking (checkout)                                      |
-| `GET`  | `/bookings/:id`      | Booking confirmation                                             |
+| Method | Path                 | Description                                                                             |
+| ------ | -------------------- | --------------------------------------------------------------------------------------- |
+| `GET`  | `/stays`             | List/search stays (`location`, `guests`, `minPrice`, `maxPrice`, `checkIn`, `checkOut`) |
+| `GET`  | `/stays/:id`         | Stay details                                                                            |
+| `GET`  | `/stays/:id/reviews` | Reviews for a stay                                                                      |
+| `POST` | `/stays/:id/reviews` | Add a review                                                                            |
+| `POST` | `/bookings`          | Create a booking (checkout)                                                             |
+| `GET`  | `/bookings/:id`      | Booking confirmation                                                                    |
 
 Data is seeded in-memory (`apps/api/src/data/seed.ts`) — no database. Request/response bodies are validated with the Zod schemas in `packages/shared`; invalid input returns `400` with the Zod issue list, unknown resources return `404`.
 
@@ -113,21 +113,22 @@ Run everything with `pnpm test`, or scope to one app with `pnpm --filter @lodgic
 - **Express** over a heavier framework — minimal ceremony for a handful of routes.
 - **[Fallow](https://github.com/fallow-rs/fallow) as a changed-file quality gate** alongside ESLint/Prettier — ESLint catches per-file correctness issues, Fallow catches cross-file ones (dead exports, circular deps, duplication, complexity) that a linter can't see. Scoped to changed files in CI so it grades this PR, not the whole codebase's pre-existing state.
 - **Design tokens adopted from a Google Stitch mockup** ("Global Horizon": Trust Blue `#003580` nav/brand, Action Blue `#006CE4` secondary actions, Attention Yellow `#FFB700` reserved for primary CTAs, Inter via `@fontsource` self-hosted rather than a Google Fonts runtime link) — applied as CSS custom properties in `index.css`, which is a pure drop-in for the existing CSS Modules convention. Only the checkout page's layout was restructured to match the mockup (two-column, sticky summary card, mocked payment section); no other new screens or navigation changes were invented beyond what the one available mockup screen actually showed.
+- **Date availability as an end-to-end search concern** — the search page uses one accessible range-calendar interaction, stores the range in the URL, carries it through stay details into checkout, and sends it to the API. The API treats stays as half-open date intervals (`checkIn` inclusive, `checkOut` exclusive), so a new guest may check in on the previous guest's checkout date while true overlaps are filtered and rejected.
 
 ## Tradeoffs
 
 - No persistence across server restarts (in-memory store) — a real database was out of scope for the timebox.
 - No authentication — bookings aren't tied to a user account.
-- No date-range availability conflicts are checked against existing bookings (a stay can be "double-booked").
+- Availability is enforced against confirmed in-memory bookings, but the mock store has no database transaction or cross-process lock; a production implementation would enforce the same rule atomically in persistent storage.
 - Search is a simple substring/threshold filter, not full-text or fuzzy search.
 - No image upload — stay photos are static seed data.
 
 ## What I'd build next
 
-- Availability checking against existing bookings, and blocking already-booked date ranges in the UI.
+- Exposing unavailable days directly in the calendar after selecting a particular stay; search currently validates the complete range through the API.
 - User accounts/auth, so a "My bookings" view is possible.
 - Pagination or infinite scroll on the search results.
-- A more capable search (price range and date pickers wired into the query, not just location/guests).
+- A more capable search with user-facing price filters and fuzzy location matching.
 - Persisting data to a real database (e.g. SQLite via Prisma) instead of the in-memory store.
 - Deployment (e.g. Vercel for the frontend, Render for the API) and basic request logging/observability.
 

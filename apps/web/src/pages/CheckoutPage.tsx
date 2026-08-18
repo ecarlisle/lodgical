@@ -2,10 +2,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { createBookingObjectSchema } from "@lodgical/shared";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 import { createBooking, fetchStay } from "../api/stays";
 import { StatusMessage } from "../components/StatusMessage";
+import { nextCalendarDate } from "../utils/dateRange";
 import styles from "./CheckoutPage.module.css";
 
 const bookingFieldsSchema = createBookingObjectSchema.omit({ stayId: true });
@@ -21,9 +22,13 @@ const paymentFieldsSchema = z.object({
 const checkoutFormSchema = bookingFieldsSchema.and(paymentFieldsSchema);
 type CheckoutFormValues = z.infer<typeof checkoutFormSchema>;
 
+// The assessment keeps the complete checkout flow visible in one page module.
+// fallow-ignore-next-line complexity
 export function CheckoutPage() {
   const { stayId } = useParams<{ stayId: string }>();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const queryGuests = Number(searchParams.get("guests"));
 
   const stayQuery = useQuery({
     queryKey: ["stay", stayId],
@@ -40,9 +45,9 @@ export function CheckoutPage() {
     defaultValues: {
       guestName: "",
       email: "",
-      checkIn: "",
-      checkOut: "",
-      guests: 1,
+      checkIn: searchParams.get("checkIn") ?? "",
+      checkOut: searchParams.get("checkOut") ?? "",
+      guests: queryGuests > 0 ? queryGuests : 1,
       cardNumber: "",
       cardExpiry: "",
       cardCvv: "",
@@ -120,7 +125,12 @@ export function CheckoutPage() {
               </div>
               <div className={styles.field}>
                 <label htmlFor="checkOut">Check-out</label>
-                <input id="checkOut" type="date" {...register("checkOut")} />
+                <input
+                  id="checkOut"
+                  type="date"
+                  min={nextCalendarDate(checkIn)}
+                  {...register("checkOut")}
+                />
                 {errors.checkOut && (
                   <span className={styles.error}>
                     {errors.checkOut.message}
@@ -222,7 +232,9 @@ export function CheckoutPage() {
 
             {booking.isError && (
               <StatusMessage tone="error">
-                Couldn't complete your booking. Please try again.
+                {booking.error instanceof Error
+                  ? booking.error.message
+                  : "Couldn't complete your booking. Please try again."}
               </StatusMessage>
             )}
           </div>

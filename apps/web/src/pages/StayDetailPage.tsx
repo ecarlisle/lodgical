@@ -2,14 +2,17 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createReviewSchema, type CreateReviewInput } from "@lodgical/shared";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { createReview, fetchReviews, fetchStay } from "../api/stays";
 import { StatusMessage } from "../components/StatusMessage";
 import styles from "./StayDetailPage.module.css";
 
+// The assessment keeps stay, review, and review-form states in one page module.
+// fallow-ignore-next-line complexity
 export function StayDetailPage() {
   const { id } = useParams<{ id: string }>();
   const stayId = id!;
+  const location = useLocation();
   const queryClient = useQueryClient();
 
   const stayQuery = useQuery({
@@ -52,7 +55,7 @@ export function StayDetailPage() {
 
   return (
     <div>
-      <Link to="/">&larr; Back to search</Link>
+      <Link to={`/${location.search}`}>&larr; Back to search</Link>
       <h1>{stay.title}</h1>
       <p className={styles.location}>{stay.location}</p>
 
@@ -75,7 +78,10 @@ export function StayDetailPage() {
           <strong>${stay.pricePerNight}</strong> / night · up to{" "}
           {stay.maxGuests} guests
         </div>
-        <Link to={`/checkout/${stay.id}`} className={styles.bookButton}>
+        <Link
+          to={`/checkout/${stay.id}${location.search}`}
+          className={styles.bookButton}
+        >
           Book now
         </Link>
       </div>

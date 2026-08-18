@@ -13,22 +13,22 @@ Status legend: ✅ done · 🚧 partial / needs follow-up · ⬜ not started · 
 | View reviews                                       | ✅     | [`StayDetailPage.tsx`](../apps/web/src/pages/StayDetailPage.tsx), `GET /stays/:id/reviews`                                                                                                                                                               | `stays.test.ts`                      |
 | Add a review                                       | ✅     | [`StayDetailPage.tsx`](../apps/web/src/pages/StayDetailPage.tsx), `POST /stays/:id/reviews`                                                                                                                                                              | `stays.test.ts`                      |
 | Display pricing                                    | ✅     | `StayCard`, `StayDetailPage`, `CheckoutPage` (computed total)                                                                                                                                                                                            | Manual (browser)                     |
-| Display availability                               | 🚧     | Only `maxGuests` is checked; no date-range conflict against existing bookings                                                                                                                                                                            | —                                    |
+| Display availability                               | ✅     | `DateRangeField`, date-aware `GET /stays`, URL handoff through details/checkout, and server-side booking conflict rejection                                                                                                                              | `stays.test.ts`, `bookings.test.ts`  |
 | Checkout flow → confirmed booking (payment mocked) | ✅     | [`CheckoutPage.tsx`](../apps/web/src/pages/CheckoutPage.tsx) (details form + mocked, client-validated-only payment fields, never sent to the API) → [`BookingConfirmationPage.tsx`](../apps/web/src/pages/BookingConfirmationPage.tsx), `POST /bookings` | `bookings.test.ts`, manual (browser) |
 | Frontend talks to a backend API                    | ✅     | [`apps/web/src/api/`](../apps/web/src/api/) → [`apps/api`](../apps/api)                                                                                                                                                                                  | Manual (browser), integration tests  |
 
 ## Technical expectations
 
-| Requirement              | Status | Where                                                                                                                                 | Verified by                                                              |
-| ------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Responsive design        | 🚧     | Fluid grid/flex layouts, relative units, one small-viewport breakpoint in `Layout.module.css`                                         | `pnpm lighthouse` (mobile-emulated); not yet checked across real devices |
-| Loading state            | ✅     | `StatusMessage` + TanStack Query `isPending` on every page                                                                            | Manual (browser)                                                         |
-| Empty state              | ✅     | "No stays match", "No reviews yet"                                                                                                    | Manual (browser)                                                         |
-| Error state              | ✅     | `StatusMessage tone="error"` on every query/mutation                                                                                  | Manual (browser)                                                         |
-| Basic accessibility      | ✅     | Semantic headings, `alt`/`aria-label`s, visible focus rings, form `label`s                                                            | `pnpm lighthouse` — 100/100 accessibility as of last local run           |
-| A few meaningful tests   | ✅     | [`apps/api/src/__tests__/`](../apps/api/src/__tests__/) (10), [`StayCard.test.tsx`](../apps/web/src/components/StayCard.test.tsx) (2) | `pnpm test`                                                              |
-| Simple CI pipeline       | ✅     | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) — format, lint, fallow audit, typecheck, test, build                        | CI run on push/PR                                                        |
-| Production build process | ✅     | `pnpm build`                                                                                                                          | Verified locally + in CI                                                 |
+| Requirement              | Status | Where                                                                                                                                    | Verified by                                                              |
+| ------------------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Responsive design        | 🚧     | Fluid grid/flex layouts plus small-viewport breakpoints in `Layout.module.css`, `SearchPage.module.css`, and `DateRangeField.module.css` | `pnpm lighthouse` (mobile-emulated); not yet checked across real devices |
+| Loading state            | ✅     | `StatusMessage` + TanStack Query `isPending` on every page                                                                               | Manual (browser)                                                         |
+| Empty state              | ✅     | "No stays match", "No reviews yet"                                                                                                       | Manual (browser)                                                         |
+| Error state              | ✅     | `StatusMessage tone="error"` on every query/mutation                                                                                     | Manual (browser)                                                         |
+| Basic accessibility      | ✅     | Semantic headings, `alt`/`aria-label`s, visible focus rings, form `label`s                                                               | `pnpm lighthouse` — 100/100 accessibility as of last local run           |
+| A few meaningful tests   | ✅     | API route tests cover validation, filtering, conflict rejection, and adjacency; component tests cover date summaries and URL handoff     | `pnpm test`                                                              |
+| Simple CI pipeline       | ✅     | [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) — format, lint, fallow audit, typecheck, test, build                           | CI run on push/PR                                                        |
+| Production build process | ✅     | `pnpm build`                                                                                                                             | Verified locally + in CI                                                 |
 
 ## Optional
 
@@ -54,11 +54,11 @@ Status legend: ✅ done · 🚧 partial / needs follow-up · ⬜ not started · 
 
 | Method | Path                 | Status | Notes                                                                          |
 | ------ | -------------------- | ------ | ------------------------------------------------------------------------------ |
-| `GET`  | `/stays`             | ✅     | supports `location`, `guests`, `minPrice`, `maxPrice`                          |
+| `GET`  | `/stays`             | ✅     | supports `location`, `guests`, `minPrice`, `maxPrice`, `checkIn`, `checkOut`   |
 | `GET`  | `/stays/:id`         | ✅     |                                                                                |
 | `GET`  | `/stays/:id/reviews` | ✅     |                                                                                |
 | `POST` | `/stays/:id/reviews` | ✅     |                                                                                |
-| `POST` | `/bookings`          | ✅     |                                                                                |
+| `POST` | `/bookings`          | ✅     | rejects overlapping confirmed bookings with `409 Conflict`                     |
 | `GET`  | `/bookings/:id`      | ✅     | added beyond the brief — needed for the confirmation page to survive a refresh |
 
 ---
