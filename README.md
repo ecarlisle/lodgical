@@ -169,6 +169,4 @@ to validate, not as evidence that the application worked.
 
 ## Screen recording
 
-The required 5–10 minute walkthrough will be linked here after upload. It will
-cover the end-to-end guest journey, the decisions above, verification evidence,
-and the deliberate scope tradeoffs.
+A 5–10 minute walkthrough of the solution, key decisions, and anything worth noting during review: [https://youtu.be/bKxobfy3dYk](https://youtu.be/bKxobfy3dYk)
