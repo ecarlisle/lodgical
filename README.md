@@ -162,4 +162,4 @@ This project was built with [Claude Code](https://claude.com/claude-code) (Anthr
 
 ## Screen recording
 
-_A 5–10 minute walkthrough of the solution, key decisions, and anything worth noting during review will be linked here._
+A 5–10 minute walkthrough of the solution, key decisions, and anything worth noting during review: [https://youtu.be/bKxobfy3dYk](https://youtu.be/bKxobfy3dYk)

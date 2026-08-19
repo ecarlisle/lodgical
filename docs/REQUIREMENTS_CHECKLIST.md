@@ -39,16 +39,16 @@ Status legend: ✅ done · 🚧 partial / needs follow-up · ⬜ not started · 
 
 ## Submission checklist
 
-| Requirement                      | Status | Where                                                                        |
-| -------------------------------- | ------ | ---------------------------------------------------------------------------- |
-| Git repo with frontend + backend | ✅     | this repo                                                                    |
-| README: setup instructions       | ✅     | [README.md § Setup](../README.md#setup)                                      |
-| README: available scripts        | ✅     | [README.md § Scripts](../README.md#scripts)                                  |
-| README: architecture decisions   | ✅     | [README.md § Architecture decisions](../README.md#architecture-decisions)    |
-| README: tradeoffs                | ✅     | [README.md § Tradeoffs](../README.md#tradeoffs)                              |
-| README: what's next              | ✅     | [README.md § What I'd build next](../README.md#what-id-build-next)           |
-| README: AI/LLM usage note        | ✅     | [README.md § Use of AI/LLMs](../README.md#use-of-aillms)                     |
-| Screen recording (5–10 min)      | ⬜     | [README.md § Screen recording](../README.md#screen-recording) — link pending |
+| Requirement                      | Status | Where                                                                                        |
+| -------------------------------- | ------ | -------------------------------------------------------------------------------------------- |
+| Git repo with frontend + backend | ✅     | this repo                                                                                    |
+| README: setup instructions       | ✅     | [README.md § Setup](../README.md#setup)                                                      |
+| README: available scripts        | ✅     | [README.md § Scripts](../README.md#scripts)                                                  |
+| README: architecture decisions   | ✅     | [README.md § Architecture decisions](../README.md#architecture-decisions)                    |
+| README: tradeoffs                | ✅     | [README.md § Tradeoffs](../README.md#tradeoffs)                                              |
+| README: what's next              | ✅     | [README.md § What I'd build next](../README.md#what-id-build-next)                           |
+| README: AI/LLM usage note        | ✅     | [README.md § Use of AI/LLMs](../README.md#use-of-aillms)                                     |
+| Screen recording (5–10 min)      | ✅     | [README.md § Screen recording](../README.md#screen-recording) — https://youtu.be/bKxobfy3dYk |
 
 ## API surface (brief's minimum + additions)
 
